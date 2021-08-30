@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        article {
+            padding: 20px;
+            margin: 3px;
+            background-color: lightblue;
+        }
+
+        .partial {
+            border: 3px red dotted;
+            display: inline-block;
+            list-style: decimal;
+        }
+
+        .anim-rotate {
+            animation: rotate-keyframes 1s linear infinite
+        }
+
+        @keyframes rotate-keyframes {
+            to {
+                transform: rotate(1turn)
+            }
+        }
+
+    </style>
+
+    <!-- <link rel="stylesheet" href="./../../css/___reset.css"> -->
+
+</head>
+<body>
+
+    <h1>partial fetching</h1>
+    <p>foo bar and baz are partials</p>
+
+<main>
+
+<!-- partials -->
+
+
+
+<div class="partial">
+    <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
+        <g id="Circle">
+        <circle cx="8" cy="8" r="7" stroke="currentColor" 
+            stroke-opacity="0.25" stroke-width="2" 
+            vector-effect="non-scaling-stroke" />
+        <path d="M15 8a7.002 7.002 0 00-7-7" stroke="currentColor" 
+            stroke-width="2" stroke-linecap="round" 
+            vector-effect="non-scaling-stroke" />
+        </g>
+    </svg>
+    <link rel="partial" href="./baz.html" />
+</div>
+
+<div class="partial">
+    <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
+        <use href="#Circle" />
+    </svg>
+    <link rel="partial" href="./foo.html">
+</div>
+
+
+<div class="partial">
+    <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
+        <use href="#Circle" />
+    </svg>
+    <link rel="partial" href="./bar.html" />
+</div>
+
+<div class="partial">
+    <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
+        <use href="#Circle" />
+    </svg>
+    <link rel="partial" href="./empty.html" />
+</div>
+
+<!-- partials -->
+
+</main>
+<!-- 
+<style>
+    .bg-1,
+.bg-2,
+.bg-3,
+.bg-4,
+.bg-5,
+.bg-6,
+.bg-7 {
+	color: #ffffff;
+	margin: 0.5em 0;
+	padding: 0.5em 1em;
+}
+
+.bg-1 {
+	background-color: #001f3f;
+}
+
+.bg-2 {
+	background-color: #0074d9;
+}
+
+.bg-3 {
+	background-color: #3d9970;
+}
+
+.bg-4 {
+	background-color: #ff851b;
+}
+
+.bg-5 {
+	background-color: #ff4136;
+}
+
+.bg-6 {
+	background-color: #f012be;
+}
+
+.bg-7 {
+	background-color: #111111;
+}
+</style>
+<div class="bg-1">
+	.bg-1
+	<div class="bg-2">
+		.bg-2
+		<div class="bg-3">
+			.bg-3
+			<div class="bg-4">
+				.bg-4
+				<div class="bg-5">
+					.bg-5
+					<div class="bg-6">
+						.bg-6
+						<div class="bg-7">
+							.bg-7
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+
+let levelsUp = function (elem, selector, distance) {
+
+    console.log('___ levelup');
+
+    // If distance isn't defined yet, set it to 0
+    if (!distance) {
+        distance = 0;
+    }
+
+    // Increase the distance by 1
+    distance++;
+
+    // Get the parent of the current element
+    let parent = elem.parentNode;
+
+    // If you we reach an element with no matches() method, bail
+    if (!parent.matches) return -1;
+
+    // If we've reached the parent, return the distance
+    if (parent.matches(selector)) return distance;
+
+    // Otherwise, recursively run levelsUp() again
+    return levelsUp(parent, selector, distance);
+
+};
+
+
+var start = document.querySelector('.bg-7');
+
+console.log(levelsUp(start, '.bg-1'));
+
+
+
+
+</script>
+
+
+-->
+
+<script src="./fetchPartialHtml.js"></script>
+
+<script>
+
+
+
+/// 01
+const partialTags = document.getElementsByTagName("link");
+
+//
+document.onreadystatechange = function () {
+
+    if (document.readyState == "interactive") {
+        for (let i = 0; i < partialTags.length; i++) {
+            Partial.fetchHtml( partialTags[i] );
+        }
+    }
+
+}
+
+
+
+// observatory();
+
+function observatory() {
+
+
+    // Select the node that will be observed for mutations
+    // const targetNode = document.getElementById('some-id');
+    // const targetNode = document.body;
+    const targetNode = document.querySelector('main');
+
+    // Options for the observer (which mutations to observe)
+    const config = { attributes: true, childList: true, subtree: true };
+
+
+    // Callback function to execute when mutations are observed
+    const callback = function(mutationsList, observer) {
+
+        // Use traditional 'for loops' for IE 11
+        for(const mutation of mutationsList) {
+
+            if (mutation.type === 'childList') {
+                console.log('A child node has been added or removed.');
+            }
+
+            else if (
+                mutation.type === 'attributes' &&
+                mutation.attributeName === 'ref'
+            ) {
+                console.log('The ' + mutation.attributeName + ' attribute was modified.');
+            }
+
+        }
+
+    };
+
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(callback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(targetNode, config);
+
+    // Later, you can stop observing
+    // observer.disconnect();
+
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
