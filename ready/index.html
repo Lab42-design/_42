@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom ready</title>
+</head>
+<body>
+
+
+    https://developer.mozilla.org/en-US/docs/Web/API/Window#event_handlers
+
+
+
+
+<script src="./readyPromise.js"></script>
+
+<script>
+
+
+
+// Promise.all([documentResolve, windowResolve]).then(start_application);
+// const domready = documentReady();
+
+//
+domready.then(document_ready);
+
+//
+winready.then(window_ready);
+
+//
+Promise.all([domready, winready]).then(start_application);
+
+
+function start_application() {
+    console.log('documentResolve AND windowResolve');
+    console.log('OK');
+};
+
+function window_ready() {
+    console.log('windowResolve');
+    console.log('OK');
+};
+
+function document_ready() {
+    console.log('documentResolve');
+    console.log('OK');
+};
+
+
+
+</script>
+
+</body>
+</html>
