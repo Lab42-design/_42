@@ -39,7 +39,7 @@ const windowReady = () => new Promise(resolve => {
 
     }
 
-    window.addEventListener('load', resolve);
+    document.addEventListener('load', resolve);
 })
 
 const winready = windowReady();
