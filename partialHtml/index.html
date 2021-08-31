@@ -204,9 +204,28 @@ document.onreadystatechange = function () {
         for (let i = 0; i < partialTags.length; i++) {
             Partial.fetchHtml( partialTags[i] );
         }
+        
+        // create and dispatch the event
+        const event = new CustomEvent("htmlPartialsReady", {
+            detail: {
+                htmlPartialsReady: true
+            }
+        });
+        window.dispatchEvent(event);
+
     }
 
 }
+
+
+
+// check for an event set by partial loader
+window.addEventListener("htmlPartialsReady", function(e) { 
+    console.log('htmlPartialsReady is true');
+});
+
+
+
 
 
 
