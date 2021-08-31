@@ -23,7 +23,6 @@ const documentReady = () => new Promise(resolve => {
 
 // export the Promise, not the generator
 const domready = documentReady()
-
 // export default singleton
 
 
@@ -32,14 +31,13 @@ const windowReady = () => new Promise(resolve => {
 
     const { readyState } = document
 
+    // resolve early
     if (readyState === 'complete') {
-
-        document.removeEventListener("load", resolve);
+        window.removeEventListener("load", resolve);
         return resolve()
-
     }
-
-    document.addEventListener('load', resolve);
+    // otherwise, resolve when ready
+    window.addEventListener('load', resolve);
 })
 
 const winready = windowReady();
