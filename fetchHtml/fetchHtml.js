@@ -16,7 +16,7 @@ class fetchHtml {
      * @param {file} url The URL to request
      * @param {HTMLElement} $el The element to insert our HTML or error into
      */
-    static fetchHtml(HTMLElement) {
+    static partial(HTMLElement) {
 
         const file = HTMLElement.getAttribute("href");
 
