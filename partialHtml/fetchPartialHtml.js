@@ -37,7 +37,7 @@ class Partial {
                     return Promise.reject(response);
                 }
             }).then(html => {
-                if (HTMLElement.attributes.rel.value === "partial") {
+                if (HTMLElement.attributes.rel.value === "html") {
                     HTMLElement.parentNode.innerHTML = html; // OK
                 }
                 resolve(html);
