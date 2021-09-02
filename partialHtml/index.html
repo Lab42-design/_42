@@ -188,7 +188,7 @@ console.log(levelsUp(start, '.bg-1'));
 
 -->
 
-<script src="./fetchPartialHtml.js"></script>
+<script src="./fetchHtml.js"></script>
 
 <script>
 
@@ -202,7 +202,7 @@ document.onreadystatechange = function () {
 
     if (document.readyState == "interactive") {
         for (let i = 0; i < partialTags.length; i++) {
-            Partial.fetchHtml( partialTags[i] );
+            fetchHtml.fetchHtml( partialTags[i] );
         }
         
         // create and dispatch the event

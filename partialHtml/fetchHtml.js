@@ -4,7 +4,7 @@
  * fetch html partial from url or from local file
  *  
  */
-class Partial {
+class fetchHtml {
 
     constructor() {
         // this.partialTag = partialTag
