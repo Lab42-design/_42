@@ -202,7 +202,7 @@ document.onreadystatechange = function () {
 
     if (document.readyState == "interactive") {
         for (let i = 0; i < partialTags.length; i++) {
-            fetchHtml.fetchHtml( partialTags[i] );
+            fetchHtml.partial( partialTags[i] );
         }
         
         // create and dispatch the event
