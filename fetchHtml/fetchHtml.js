@@ -10,7 +10,6 @@ class fetchHtml {
         // this.partialTag = partialTag
     }
 
-
     /**
      * Runs a fetch request to replace the DOM element
      * @param {file} url The URL to request
@@ -42,7 +41,7 @@ class fetchHtml {
                 }
                 resolve(html);
             }).catch(function (e) {
-                HTMLElement.innerHTML = 'Sorry, the data can not be found / 404';
+                HTMLElement.parentNode.innerHTML = 'Sorry, the data can not be found / 404';
             })
         })
     }
