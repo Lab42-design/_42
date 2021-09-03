@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sample startup doc</title>
+
+
+
+    <style>
+
+        h1 {
+            padding: 30px;
+        }
+
+        section {
+            width: 100vw;
+            min-height: 75vh;
+        }
+
+        article {
+            padding: 20px;
+            margin: 3px;
+            background-color: lightblue;
+        }
+    
+        .partial {
+            padding: 30px;
+            display: inline-block;
+            background-color: darkslateblue;
+        }
+    
+        .anim-rotate {
+            animation: rotate-keyframes 1s linear infinite
+        }
+    
+        @keyframes rotate-keyframes {
+            to {
+                transform: rotate(1turn)
+            }
+        }
+
+        svg {
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+            display: inline-block;
+        }
+    
+    ul {
+        padding: 30px;
+        background-color: rgba(121, 116, 98, 0.425);
+    }
+
+    li {
+        width: max-content;
+        margin: 4px 0 0 0;
+        padding: 6px;
+        background-color:rgba(255, 105, 180, 0.808);
+    }
+
+    .css {
+        background-color:rgba(174, 85, 171, 0.808);
+    }
+    
+    </style>
+
+</head>
+<body>
+
+
+<h1>_lab</h1>
+<ul>
+    <h4>implented stuff:</h4>
+    <li class="css">minimal css reset for html5</li>
+    <li>dom ready check based on Promises</li>
+    <li>html partials / with fetch and Promises</li>
+</ul>
+
+
+
+
+
+
+
+<main>
+
+
+<!-- PARTIAL -->
+<section>
+
+    <div class="partial">
+        <link rel="html" href="./foo.html" />
+    </div>
+    
+    <div class="partial">
+        <link rel="html" href="./baz.html" />
+    </div>
+    
+    <div class="partial">
+        <link rel="html" href="./bar.html" />
+    </div>
+    
+</section>
+<!-- PARTIAL -->
+
+
+
+
+<!-- SLIDESHOW -->
+<!-- <article class="slideshowsection">
+    <style>
+        .slideshowsection {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden !important;
+            background-color: rgb(130, 173, 28);
+            padding: 0;
+
+        }
+    </style>
+<link rel="stylesheet" href="./rsrc/_fx/slideshow/slideshow.css" />
+
+
+<ul class="slideshow">
+    <li><img src="./rsrc/_fx/slideshow/water.png" alt="" /></li>
+    <li><img src="./rsrc/_fx/slideshow/knives.png" alt="" /></li>
+    <li><img src="./rsrc/_fx/slideshow/fly.png" alt="" /></li>
+</ul> -->
+
+
+
+</article>
+<!-- SLIDESHOW -->
+
+</main>
+
+
+
+<br>
+<br>
+<br>
+<br><br>
+<br>
+
+
+
+
+<!-- _42 scripts -->
+<script module src="./../readyPromise/readyPromise.src.js"></script>
+<script module src="./../fetchHtml/fetchHtml.src.js"></script>
+
+<script>
+
+// add an appropriate event listener
+// window.addEventListener("htmlPartialsReady", function(e) { 
+//     console.log( 'htmlPartialsReady' );
+// });
+
+// create and dispatch the event
+// const event = new CustomEvent("htmlPartialsReady", {
+//     detail: {
+//         htmlPartialsReady: true
+//     }
+// });
+// window.dispatchEvent(event);
+
+</script>
+
+
+
+
+<script>
+
+
+Promise.all([domready, winready]).then(start_application);
+
+
+
+
+function start_application() {
+    console.log('documentResolve AND windowResolve OK');
+
+    fetchHtml.all('link');
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<script debug language="javascript">
+// window.tdiff = []; fred = function(a,b){return a-b;};
+// window.document.onload = function(e){ 
+//     console.log("document.onload", e, Date.now() ,window.tdiff,  
+//     (window.tdiff[0] = Date.now()) && window.tdiff.reduce(fred) ); 
+// }
+// window.onload = function(e){ 
+//     console.log("window.onload", e, Date.now() ,window.tdiff, 
+//     (window.tdiff[1] = Date.now()) && window.tdiff.reduce(fred) ); 
+// }
+</script>
+
+</body>
+</html>
