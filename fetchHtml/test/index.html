@@ -195,14 +195,14 @@ console.log(levelsUp(start, '.bg-1'));
 
 
 /// 01
-const partialTags = document.getElementsByTagName("link");
+// const partialTags = document.getElementsByTagName("link");
 
 //
 document.onreadystatechange = function () {
 
     if (document.readyState == "interactive") {
 
-        fetchHtml.getAllLinks('link');
+        fetchHtml.all('link');
 
         // for (let i = 0; i < partialTags.length; i++) {
         //     fetchHtml.partial( partialTags[i] );

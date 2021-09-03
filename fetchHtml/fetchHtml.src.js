@@ -7,15 +7,18 @@
 class fetchHtml {
 
     constructor() {
-        // this.partialTag = partialTag
+        this.partialTag = partialTag
     }
 
     /**
      * Searces all html elements for <link rel="html" href="partial.html" />
      */
-    static getAllLinks(HtmlTag) {
-        for (let i = 0; i < HtmlTag.length; i++) {
-            this.partial( partialTags[i] );
+    static all(partialTags) {
+
+        const partialTags = document.getElementsByTagName("link");
+
+        for (let i = 0; i < partialTags.length; i++) {
+            this.partial(partialTags[i] );
         }
     }
 
