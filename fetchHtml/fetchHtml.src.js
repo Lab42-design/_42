@@ -7,20 +7,35 @@
 class fetchHtml {
 
     constructor() {
-        this.partialTag = partialTag
+        // this.partialTag = partialTag
     }
 
     /**
      * Searces all html elements for <link rel="html" href="partial.html" />
      */
-    static all(partialTags) {
+    static all(el) {
 
-        const partialTags = document.getElementsByTagName("link");
+        const partialTags = document.getElementsByTagName(el);
 
         for (let i = 0; i < partialTags.length; i++) {
-            this.partial(partialTags[i] );
+            this.partial(partialTags[i]);
         }
+
     }
+
+    static oneById(id) {
+        const partialTag = document.getElementById(id);
+        this.partial(partialTag);
+    }
+
+    // static zorro(el) {
+    //     const partialTags = document.getElementsByTagName(el);
+    //     for (let i = 0; i < partialTags.length; i++) {
+    //         this.partial(partialTags[i]);
+    //     }
+    // }
+    // console.log("___ i " + i);
+    // console.log(i + " " + partialTags);
 
     /**
      * Runs a fetch request to replace the DOM element

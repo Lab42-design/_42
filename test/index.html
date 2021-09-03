@@ -87,23 +87,41 @@
 </main>
 
 
-
-<script src="../fetchHtml.src.js"></script>
+<script src="./../readyPromise/readyPromise.src.js"></script>
+<script src="./../fetchHtml/fetchHtml.src.js"></script>
 <script>
+//
+domready.then(document_ready);
 
-document.onreadystatechange = function () {
+//
+winready.then(window_ready);
 
-    if (document.readyState == "interactive") {
+//
+Promise.all([domready, winready]).then(start_application);
 
-        fetchHtml.all('link');
 
-        // for (let i = 0; i < partialTags.length; i++) {
-        //     fetchHtml.partial( partialTags[i] );
-        // }
-        
-    }
+function start_application() {
+    console.log('documentResolve AND windowResolve OK');
 
-}
+    fetchHtml.all('link');
+
+    // fetchHtml.partial('link');
+
+};
+
+function window_ready() {
+    console.log('windowResolve OK');
+
+};
+
+function document_ready() {
+    console.log('documentResolve OK');
+
+};
+
+
+
+
 
 </script>
 
