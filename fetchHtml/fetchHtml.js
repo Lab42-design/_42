@@ -1,49 +1,43 @@
 'use strict';
 /**
- * 
+ *
  * fetch html partial from url or from local file
- *  
+ *
  */
-class fetchHtml {
-
-    constructor() {
-        // this.partialTag = partialTag
+var fetchHtml = /** @class */ (function () {
+    function fetchHtml() {
     }
-
     /**
      * Runs a fetch request to replace the DOM element
-     * @param {file} url The URL to request
-     * @param {HTMLElement} $el The element to insert our HTML or error into
+     * @param {HTMLElement} HTMLElement The element to insert our HTML or error into
      */
-    static partial(HTMLElement) {
-
-        const file = HTMLElement.getAttribute("href");
-
-        return new Promise((resolve, reject) => {
-            const headers = new Headers();
-            const request = new Request(file, {
+    fetchHtml.partial = function (HTMLElement) {
+        var file = HTMLElement.getAttribute("href");
+        return new Promise(function (resolve, reject) {
+            var headers = new Headers();
+            var request = new Request(file, {
                 method: 'GET',
                 headers: headers,
                 mode: 'cors',
-                cache: 'default',
+                cache: 'default'
             });
-
             fetch(request).then(function (response) {
-                credentials: 'same-origin' // https://github.com/github/fetch
+                credentials: 'same-origin';
                 if (response.status == 200) {
                     return response.text();
-                } else {
+                }
+                else {
                     return Promise.reject(response);
                 }
-            }).then(html => {
+            }).then(function (html) {
                 if (HTMLElement.attributes.rel.value === "html") {
-                    HTMLElement.parentNode.innerHTML = html; // OK
+                    HTMLElement.parentNode.innerHTML = html;
                 }
                 resolve(html);
-            }).catch(function (e) {
+            })["catch"](function (e) {
                 HTMLElement.parentNode.innerHTML = 'Sorry, the data can not be found / 404';
-            })
-        })
-    }
-
-}
+            });
+        });
+    };
+    return fetchHtml;
+}());
