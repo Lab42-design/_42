@@ -11,7 +11,7 @@ class fetchHtml {
     /**
      * Runs a fetch request to replace the DOM element
      */
-    static partial(HTMLElement):Promise<string> {
+     static partial(HTMLElement):Promise<string> {
 
         const file:string = HTMLElement.getAttribute("href");
 
