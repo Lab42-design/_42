@@ -188,7 +188,7 @@ console.log(levelsUp(start, '.bg-1'));
 
 -->
 
-<script src="../fetchHtml.js"></script>
+<script src="../fetchHtml.src.js"></script>
 
 <script>
 
@@ -201,9 +201,12 @@ const partialTags = document.getElementsByTagName("link");
 document.onreadystatechange = function () {
 
     if (document.readyState == "interactive") {
-        for (let i = 0; i < partialTags.length; i++) {
-            fetchHtml.partial( partialTags[i] );
-        }
+
+        fetchHtml.getAllLinks('link');
+
+        // for (let i = 0; i < partialTags.length; i++) {
+        //     fetchHtml.partial( partialTags[i] );
+        // }
         
         // create and dispatch the event
         const event = new CustomEvent("htmlPartialsReady", {

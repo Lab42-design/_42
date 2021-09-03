@@ -11,9 +11,18 @@ class fetchHtml {
     }
 
     /**
+     * Searces all html elements for <link rel="html" href="partial.html" />
+     */
+    static getAllLinks(HtmlTag) {
+        for (let i = 0; i < HtmlTag.length; i++) {
+            this.partial( partialTags[i] );
+        }
+    }
+
+    /**
      * Runs a fetch request to replace the DOM element
      */
-    static partial(HTMLElement) {
+    static async partial(HTMLElement) {
 
         const file = HTMLElement.getAttribute("href");
 
@@ -35,11 +44,11 @@ class fetchHtml {
                 }
             }).then(html => {
                 if (HTMLElement.attributes.rel.value === "html") {
-                    HTMLElement.parentNode.innerHTML = html; // OK
+                    HTMLElement.parentNode.innerHTML = html;
                 }
                 resolve(html);
             }).catch(function (e) {
-                HTMLElement.parentNode.innerHTML = 'Sorry, the data can not be found / 404';
+                HTMLElement.parentNode.innerHTML = 'Sorry, an error occured / 404';
             })
         })
     }
