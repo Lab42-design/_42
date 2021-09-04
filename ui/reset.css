@@ -11,15 +11,11 @@
 
 /* Remove default margin */
 body,
-h1,
-h2,
-h3,
-h4,
+h1, h2, h3, h4, h5, h6,
 p,
 figure,
 blockquote,
-dl,
-dd {
+dl, dd {
     margin: 0;
 }
 
@@ -28,8 +24,7 @@ Remove list styles on ul, ol elements with a list role, which suggests default s
 ul[role="list"],
 ol[role="list"]
 */
-ul,
-ol {
+ul, ol {
     padding: 0;
     list-style: none;
 }
