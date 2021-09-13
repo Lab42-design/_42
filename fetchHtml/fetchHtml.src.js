@@ -28,15 +28,6 @@ class fetchHtml {
         this.partial(partialTag);
     }
 
-    // static zorro(el) {
-    //     const partialTags = document.getElementsByTagName(el);
-    //     for (let i = 0; i < partialTags.length; i++) {
-    //         this.partial(partialTags[i]);
-    //     }
-    // }
-    // console.log("___ i " + i);
-    // console.log(i + " " + partialTags);
-
     /**
      * Runs a fetch request to replace the DOM element
      */
@@ -65,7 +56,8 @@ class fetchHtml {
                     HTMLElement.parentNode.innerHTML = html;
                 }
                 resolve(html);
-            }).catch(function (e) {
+            }).catch(function (error) {
+                throw 'HTTP error / ' + error;
                 HTMLElement.parentNode.innerHTML = 'Sorry, an error occured / 404';
             })
         })

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vanilla JS Router</title>
+        <link rel="stylesheet" href="css/main.css" />
+    </head>
+    <link rel="stylesheet" href="../../ui/reset.css" />
+    <link rel="stylesheet" href="../../ui/typography/_9-minor-seventh.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+<body>
+
+    <header id="menu">
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#nonexists">zorromorro this should be an error page</a></li>
+                <li><a href="#42">42___</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<b>
+    <a href="https://www.youtube.com/watch?v=vn3tm0quoqE&t=154s">https://www.youtube.com/watch?v=vn3tm0quoqE&t=154s</a>
+    <br>
+    <a href="https://javascript.info/async-await">https://javascript.info/async-await</a>
+</b>
+
+<main>
+    <div id="content">
+        CONTENT
+    </div>
+</main>
+
+
+
+<footer id="footer">
+    footer
+</footer>
+
+
+
+<script src="../src/HashChangeEvent-polyfill.js"></script>
+<!-- <script src="../src/error.js"></script> -->
+<script src="../src/router.js"></script>
+<script src="../src/layout.js"></script>
+<script src="../src/page.js"></script>
+
+<script>
+const router = new Router(
+    {
+        '#index':       new Page("pages/_index.html"),
+        'home':         new Page("pages/_index.html"),
+        'about':        new Page("pages/about.html"),
+        'nonexists':    new Page("pages/nonexists.html"),
+        '42':           new Page("pages/_42.html"),
+        // "42":           new Layout(new Page("pages/42.html")),
+        // utility pages
+        'error':            new Page("pages/__error.html"),
+    },
+    document.querySelector("#content")
+);
+</script>
+
+</body>
+</html>

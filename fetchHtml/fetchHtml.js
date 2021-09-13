@@ -34,6 +34,7 @@ var fetchHtml = /** @class */ (function () {
                 }
                 resolve(html);
             })["catch"](function (e) {
+                throw 'HTTP error / ' + response.status;
                 HTMLElement.parentNode.innerHTML = 'Sorry, the data can not be found / 404';
             });
         });
