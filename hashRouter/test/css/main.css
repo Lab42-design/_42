@@ -1,22 +1,17 @@
 html {
-    /* margin: 0; */
     padding: 0;
     max-width: 560px;
     margin: auto;
 }
 
-
-
 section {
     padding: 30px;
     background-color: rgba(232, 229, 151, 0.584);
     min-width: 30vw;
-    /* min-height: 30vw; */
 }
 
 .error {
     color: rgba(216, 223, 117, 0.557);
     background-color: rebeccapurple;
     min-width: 30vw;
-    /* min-height: 30vw; */
 }
