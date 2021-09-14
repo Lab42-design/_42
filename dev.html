@@ -76,13 +76,10 @@ class doDo {
     }
 
     // static all(el) {
-
     //     const partialTags = document.getElementsByTagName(el);
-
     //     for (let i = 0; i < partialTags.length; i++) {
     //         this.partial(partialTags[i]);
     //     }
-
     // }
 
     // static oneById(id) {
@@ -95,11 +92,44 @@ class doDo {
     makeRequest(location) {
         return new Promise((resolve, reject) => {
             console.log(`Making request to ${location}`)
-            if (location === 'Google') {
+
+
+            console.log('___url ' + location)
+
+
+            fetch(location).then(function (response) {
+                if (response.status == 200) {
+                    console.log('___url status 200' + response.status)
+                    return response.text();
+                } else {
+                    console.log('ERROR 1 ')
+                }
+            }).then(html => {
+
+                console.log('___url html === ' + html)
+
+                // if (HTMLElement.attributes.rel.value === "html") {
+                //     HTMLElement.parentNode.innerHTML = html;
+                // }
+                resolve(html);
+            }).catch(function (error) {
+                // throw 'HTTP error / ' + error;
+                // HTMLElement.parentNode.innerHTML = 'Sorry, an error occured / 404';
+            })
+
+
+
+
+
+
+
+            if (location === './d.html') {
                 resolve('Google says hi')
             } else {
                 reject('We can only talk to Google')
             }
+
+
         })
     }
 
@@ -112,13 +142,22 @@ class doDo {
     }
 
     //
-    async doWork() {
+    async dadaDa(url) {
+
+        console.log('___url ' + url)
+
+
         try {
-            const response = await this.makeRequest('Google')
+
+            // 1
+            const response = await this.makeRequest(url)
             console.log('makeRequest')
+
+            // 2
             const processedResponse = await this.processRequest(response)
             console.log('processedResponse')
             console.log( processedResponse )
+
         } catch(error) {
             console.log(error)
         }
@@ -169,7 +208,7 @@ class doDo {
 
 const dodoDo = new doDo();
 
-console.log(dodoDo.doWork());
+console.log(dodoDo.dadaDa('./d.html'));
 
 </script>
 
