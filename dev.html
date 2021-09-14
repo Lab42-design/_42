@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+
+<script>
+
+
+
+// makeRequest('Google').then(response => {
+//     console.log('Response Received')
+//     return processRequest(response)
+// }).then(processResponse => {
+//     console.log('Processing Response')
+// }).catch(error => {
+//     console.log(error)
+// })
+
+
+
+//
+// function makeRequest(location) {
+//     return new Promise((resolve, reject) => {
+//         console.log(`Making request to ${location}`)
+//         if (location === 'Google') {
+//             resolve('Google says hi')
+//         } else {
+//             reject('We can only talk to Google')
+//         }
+//     })
+// }
+
+// //
+// function processRequest(response) {
+//     return new Promise((resolve, reject) => {
+//         console.log('Processing response')
+//         resolve(`Extra information ${response}`)
+//     })
+// }
+
+// //
+// async function doWork() {
+//     try {
+//         const response = await makeRequest('Google')
+//         console.log('makeRequest')
+//         const processedResponse = await processRequest(response)
+//         console.log('processedResponse')
+//     } catch(error) {
+//         console.log(error)
+//     }
+// }
+
+// doWork()
+
+
+
+</script>
+
+<script>
+'use strict';
+
+
+
+class doDo {
+
+    constructor() {
+        // this.partialTag = partialTag
+    }
+
+    // static all(el) {
+
+    //     const partialTags = document.getElementsByTagName(el);
+
+    //     for (let i = 0; i < partialTags.length; i++) {
+    //         this.partial(partialTags[i]);
+    //     }
+
+    // }
+
+    // static oneById(id) {
+    //     const partialTag = document.getElementById(id);
+    //     this.partial(partialTag);
+    // }
+
+
+    //
+    makeRequest(location) {
+        return new Promise((resolve, reject) => {
+            console.log(`Making request to ${location}`)
+            if (location === 'Google') {
+                resolve('Google says hi')
+            } else {
+                reject('We can only talk to Google')
+            }
+        })
+    }
+
+    //
+    processRequest(response) {
+        return new Promise((resolve, reject) => {
+            console.log('Processing response')
+            resolve(`Extra information ${response}`)
+        })
+    }
+
+    //
+    async doWork() {
+        try {
+            const response = await this.makeRequest('Google')
+            console.log('makeRequest')
+            const processedResponse = await this.processRequest(response)
+            console.log('processedResponse')
+            console.log( processedResponse )
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
+
+
+
+    // static async partial(HTMLElement) {
+
+    //     const file = HTMLElement.getAttribute("href");
+
+    //     return new Promise((resolve, reject) => {
+    //         const headers = new Headers();
+    //         const request = new Request(file, {
+    //             method: 'GET',
+    //             headers: headers,
+    //             mode: 'cors',
+    //             cache: 'default',
+    //         });
+
+    //         fetch(request).then(function (response) {
+    //             credentials: 'same-origin' // https://github.com/github/fetch
+    //             if (response.status == 200) {
+    //                 return response.text();
+    //             } else {
+    //                 return Promise.reject(response);
+    //             }
+    //         }).then(html => {
+    //             if (HTMLElement.attributes.rel.value === "html") {
+    //                 HTMLElement.parentNode.innerHTML = html;
+    //             }
+    //             resolve(html);
+    //         }).catch(function (error) {
+    //             throw 'HTTP error / ' + error;
+    //             HTMLElement.parentNode.innerHTML = 'Sorry, an error occured / 404';
+    //         })
+    //     })
+    // }
+
+
+
+
+
+}
+
+
+
+const dodoDo = new doDo();
+
+console.log(dodoDo.doWork());
+
+</script>
+
+
+
+</body>
+</html>
