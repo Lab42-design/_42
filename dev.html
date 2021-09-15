@@ -5,11 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="./ui/reset.css" />
 </head>
 <body>
 
 
-<div rel="html" id="main" />
+<main>
+    <div rel="html" id="main" />
+</main>
+
 
 
 
@@ -107,7 +112,6 @@ class doDo {
                     return partial.text()
                 } else {
                     reject('Partial not found')
-                    // console.log('ERROR 1 ')
                 }
             }).then(html => {
                 resolve(html)
@@ -155,7 +159,7 @@ class doDo {
             const HTMLElement = document.querySelector('#main')
 
             if (HTMLElement.attributes.rel.value === "html") {
-                reject(HTMLElement.parentNode.innerHTML = response)
+                resolve(HTMLElement.parentNode.innerHTML = response)
             }
             // } else {
                 reject('No tag for html')
