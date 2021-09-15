@@ -1,7 +1,8 @@
 # fetchHtml
+Checs the dom for <link rel="html" href="partial.html" /> tags, and replaces it with a partial html file
 
-
-load the scripts
+How to load the scripts?
+Make sure the dom is ready
 
 ```html
 <script module src="./../readyPromise/readyPromise.src.js"></script>
