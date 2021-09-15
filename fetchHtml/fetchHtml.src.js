@@ -49,16 +49,15 @@ class fetchHtml {
                 if (response.status == 200) {
                     return response.text();
                 } else {
-                    return Promise.reject(response);
+                    reject(response);
                 }
             }).then(html => {
                 if (HTMLElement.attributes.rel.value === "html") {
-                    HTMLElement.parentNode.innerHTML = html;
+                    resolve(HTMLElement.parentNode.innerHTML = html)
                 }
-                resolve(html);
+                reject(html);
             }).catch(function (error) {
-                throw 'HTTP error / ' + error;
-                HTMLElement.parentNode.innerHTML = 'Sorry, an error occured / 404';
+                console.error(error)
             })
         })
     }

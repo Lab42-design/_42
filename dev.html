@@ -9,6 +9,8 @@
 <body>
 
 
+<div rel="html" id="main" />
+
 
 
 <script>
@@ -90,45 +92,51 @@ class doDo {
 
     //
     makeRequest(location) {
+
         return new Promise((resolve, reject) => {
-            console.log(`Making request to ${location}`)
 
+            fetch(location).then(function (partial) {
 
-            console.log('___url ' + location)
+                // const contentType = partial.headers.get('Content-Type') || '';
 
+                // if (contentType.includes('text/html')) {
+                    
+                // }
 
-            fetch(location).then(function (response) {
-                if (response.status == 200) {
-                    console.log('___url status 200' + response.status)
-                    return response.text();
+                if (partial.status == 200) {
+                    return partial.text()
                 } else {
-                    console.log('ERROR 1 ')
+                    reject('Partial not found')
+                    // console.log('ERROR 1 ')
                 }
             }).then(html => {
-
-                console.log('___url html === ' + html)
-
-                // if (HTMLElement.attributes.rel.value === "html") {
-                //     HTMLElement.parentNode.innerHTML = html;
-                // }
-                resolve(html);
-            }).catch(function (error) {
-                // throw 'HTTP error / ' + error;
-                // HTMLElement.parentNode.innerHTML = 'Sorry, an error occured / 404';
+                resolve(html)
             })
 
 
+            // console.log(`Making request to ${location}`)
 
+            // fetch(location).then(function (response) {
+            //     if (response.status == 200) {
+            //         return response.text()
+            //     } else {
+            //         console.log('ERROR 1 ')
+            //     }
+            // }).then(html => {
+            //     resolve(html)
+            // })
+            // .catch(function (error) {
+            //     // throw 'HTTP error / ' + error;
+            //     // HTMLElement.parentNode.innerHTML = 'Sorry, an error occured / 404';
+            // })
 
+            // if (location === './d.html') {
+            //     resolve('Google says hi')
+            // } else {
+            //     reject('We can only talk to Google')
+            // }
 
-
-
-            if (location === './d.html') {
-                resolve('Google says hi')
-            } else {
-                reject('We can only talk to Google')
-            }
-
+            // resolve('Google says hi')
 
         })
     }
@@ -136,30 +144,39 @@ class doDo {
     //
     processRequest(response) {
         return new Promise((resolve, reject) => {
-            console.log('Processing response')
-            resolve(`Extra information ${response}`)
+            
+            // resolve(`Extra information ${response}`)
+
+
+
+            // console.log( '______ response === ' + response)
+
+            // 3
+            const HTMLElement = document.querySelector('#main')
+
+            if (HTMLElement.attributes.rel.value === "html") {
+                reject(HTMLElement.parentNode.innerHTML = response)
+            }
+            // } else {
+                reject('No tag for html')
+            // }
+
         })
     }
 
-    //
+    // url === path to partial
     async dadaDa(url) {
-
-        console.log('___url ' + url)
-
 
         try {
 
             // 1
             const response = await this.makeRequest(url)
-            console.log('makeRequest')
 
-            // 2
+            // 2 process response
             const processedResponse = await this.processRequest(response)
-            console.log('processedResponse')
-            console.log( processedResponse )
 
         } catch(error) {
-            console.log(error)
+            console.error(error)
         }
     }
 
