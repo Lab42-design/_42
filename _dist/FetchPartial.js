@@ -4,30 +4,31 @@
  *
  * <link rel="html" href="partial.html" />
  *
- * const partial = new Partial()
- * partial.includeAll()
+ * const partial = new FetchPartial()
+ * partial.fetchAll()
  *
  */
 class FetchPartial {
-    constructor() {
-        // this.partialTag = partialTag
-    }
+    // constructor() {
+    //     // this.partialTag = partialTag
+    // }
     // Searces dom all html elements for <link rel="html" href="partial.html" />
-    includeAll(element) {
-        if (element === undefined) {
-            element = 'link';
+    // and calls fetcOne()
+    fetchAll(tagName) {
+        if (tagName === undefined) {
+            tagName = 'link';
         }
-        const partial = document.getElementsByTagName(element);
-        for (let i = 0; i < partial.length; i++) {
-            if (partial[i].attributes.rel.value === "html") {
-                const file = partial[i].getAttribute("href");
-                this.include(file, partial[i]);
+        const partials = document.getElementsByTagName(tagName);
+        for (let i = 0; i < partials.length; i++) {
+            if (partials[i].attributes.rel.value === 'html') {
+                const url = partials[i].getAttribute('href');
+                this.fetc(url, partials[i]);
             }
         }
     }
-    makeRequest(file) {
+    makeRequest(url) {
         return new Promise((resolve, reject) => {
-            fetch(file).then(function (partial) {
+            fetch(url).then(function (partial) {
                 if (partial.status == 200) {
                     return partial.text();
                 }
@@ -41,7 +42,7 @@ class FetchPartial {
     }
     processRequest(response, _el) {
         return new Promise((resolve, reject) => {
-            if (_el.attributes.rel.value === "html") {
+            if (_el.attributes.rel.value === 'html') {
                 resolve(_el.outerHTML = response);
             }
             else {
@@ -49,7 +50,8 @@ class FetchPartial {
             }
         });
     }
-    async include(url, _el) {
+    // _el: HTMLCollectionOf<any>
+    async fetc(url, _el) {
         try {
             const response = await this.makeRequest(url);
             const processedResponse = await this.processRequest(response, _el);
@@ -60,4 +62,5 @@ class FetchPartial {
         }
     }
 }
+FetchPartial.tagName = 'link';
 //# sourceMappingURL=FetchPartial.js.map

@@ -4,41 +4,41 @@
  * 
  * <link rel="html" href="partial.html" />
  * 
- * const partial = new Partial()
- * partial.includeAll()
+ * const partial = new FetchPartial()
+ * partial.fetchAll()
  * 
  */
 class FetchPartial {
 
-    i: number
-    element: string;
-    file: string
-    url: string
+    static readonly url: string
+    static readonly tagName: string = 'link'
+    static readonly _el: HTMLCollectionOf<any>
 
-    constructor() {
-        // this.partialTag = partialTag
-    }
+    // constructor() {
+    //     // this.partialTag = partialTag
+    // }
 
     // Searces dom all html elements for <link rel="html" href="partial.html" />
-    includeAll(element) {
+    // and calls fetcOne()
+    fetchAll(tagName?): void {
 
-        if (element === undefined) {
-            element = 'link'
+        if (tagName === undefined) {
+            tagName = 'link'
         }
 
-        const partial = document.getElementsByTagName(element)
+        const partials = document.getElementsByTagName(tagName)
 
-        for (let i = 0; i < partial.length; i++) {
-            if (partial[i].attributes.rel.value === "html") {
-                const file = partial[i].getAttribute("href")
-                this.include(file, partial[i])
+        for (let i: number = 0; i < partials.length; i++) {
+            if (partials[i].attributes.rel.value === 'html') {
+                const url = partials[i].getAttribute('href')
+                this.fetc(url, partials[i])
             }
         }
     }
 
-    makeRequest(file) {
+    makeRequest(url: string): Promise<string> {
         return new Promise((resolve, reject) => {
-            fetch(file).then(function (partial) {
+            fetch(url).then(function (partial) {
                 if (partial.status == 200) {
                     return partial.text()
                 } else {
@@ -50,9 +50,9 @@ class FetchPartial {
         })
     }
 
-    processRequest(response, _el) {
+    processRequest(response, _el): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (_el.attributes.rel.value === "html") {
+            if (_el.attributes.rel.value === 'html') {
                 resolve(_el.outerHTML = response)
             } else {
                 reject('No tag for html')
@@ -60,10 +60,11 @@ class FetchPartial {
         })
     }
 
-    async include(url, _el) {
+    // _el: HTMLCollectionOf<any>
+    async fetc(url: string, _el: HTMLCollectionOf<any>): Promise<void> {
         try {
             const response = await this.makeRequest(url)
-            const processedResponse = await this.processRequest(response, _el)
+            const processedResponse: void = await this.processRequest(response, _el)
             return processedResponse
         } catch (error) {
             console.error(error)

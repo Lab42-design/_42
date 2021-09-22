@@ -4,18 +4,16 @@
  *
  * <link rel="html" href="partial.html" />
  *
- * const partial = new Partial()
- * partial.includeAll()
+ * const partial = new FetchPartial()
+ * partial.fetchAll()
  *
  */
 declare class FetchPartial {
-    i: number;
-    element: string;
-    file: string;
-    url: string;
-    constructor();
-    includeAll(element: any): void;
-    makeRequest(file: any): Promise<unknown>;
-    processRequest(response: any, _el: any): Promise<unknown>;
-    include(url: any, _el: any): Promise<unknown>;
+    static readonly url: string;
+    static readonly tagName: string;
+    static readonly _el: HTMLCollectionOf<any>;
+    fetchAll(tagName?: any): void;
+    makeRequest(url: string): Promise<string>;
+    processRequest(response: any, _el: any): Promise<void>;
+    fetc(url: string, _el: HTMLCollectionOf<any>): Promise<void>;
 }
