@@ -1,0 +1,19 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": true,
+    "importHelpers": true,
+    "target": "es2018",
+    "module": "amd",
+    "outDir": "_dist",
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "files": [
+    "_src/FetchPartial.ts",
+    "_src/PromiseDom.ts"
+  ],
+}

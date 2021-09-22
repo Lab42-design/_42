@@ -91,7 +91,7 @@
 <section>
 
     <div class="partial">
-        <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
+        <!-- <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
             <g id="Circle">
             <circle cx="8" cy="8" r="7" stroke="currentColor" 
                 stroke-opacity="0.25" stroke-width="2" 
@@ -100,21 +100,21 @@
                 stroke-width="2" stroke-linecap="round" 
                 vector-effect="non-scaling-stroke" />
             </g>
-        </svg>
+        </svg> -->
         <link rel="html" href="./foo.html" />
     </div>
     
     <div class="partial">
-        <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
+        <!-- <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
             <use href="#Circle" />
-        </svg>
+        </svg> -->
         <link rel="html" href="./baz.html" />
     </div>
     
     <div class="partial">
-        <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
+        <!-- <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
             <use href="#Circle" />
-        </svg>
+        </svg> -->
         <link rel="html" href="./bar.html" />
     </div>
     
@@ -165,7 +165,8 @@
 
 <!-- _42 scripts -->
 <script module src="./../readyPromise/readyPromise.src.js"></script>
-<script module src="./../fetchHtml/fetchHtml.src.js"></script>
+<!-- <script module src="./../fetchHtml/fetchHtml.src.js"></script> -->
+<script module src="../_dist/FetchPartial.js"></script>
 
 <script>
 
@@ -198,7 +199,11 @@ Promise.all([domready, winready]).then(start_application);
 function start_application() {
     console.log('documentResolve AND windowResolve OK');
 
-    fetchHtml.all('link');
+    // fetchHtml.all('link');
+
+    const partial = new FetchPartial()
+    partial.includeAll()
+
 
 };
 

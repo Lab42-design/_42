@@ -1,72 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="./ui/reset.css" />
-
-</head>
-<body>
-
-
-
-<main>
-
-
-
-    <link id="___D___01" rel="html" href="./d1.html" />
-
-    <article class="partial">
-        <link id="___D___02" rel="html" href="./d2.html" />
-    </article>
-
-    <link id="___D___03" rel="html" href="./d3.html" />
-
-
-
-</main>
-
-
-
-<script>
-'use strict';
 /**
  * 
  * usage
+ * 
+ * <link rel="html" href="partial.html" />
  * 
  * const partial = new Partial()
  * partial.includeAll()
  * 
  */
+class FetchPartial {
 
-class __Partial {
+    i: number
+    element: string;
+    file: string
+    url: string
 
     constructor() {
         // this.partialTag = partialTag
     }
 
-    includeAll(el) {
+    // Searces dom all html elements for <link rel="html" href="partial.html" />
+    includeAll(element) {
 
-        if (el === undefined) {
-            el = 'link'
+        if (element === undefined) {
+            element = 'link'
         }
 
-        const partial = document.getElementsByTagName(el)
+        const partial = document.getElementsByTagName(element)
 
         for (let i = 0; i < partial.length; i++) {
             if (partial[i].attributes.rel.value === "html") {
                 const file = partial[i].getAttribute("href")
                 this.include(file, partial[i])
-            } 
+            }
         }
     }
 
-    makeRequest(location) {
+    makeRequest(file) {
         return new Promise((resolve, reject) => {
-            fetch(location).then(function (partial) {
+            fetch(file).then(function (partial) {
                 if (partial.status == 200) {
                     return partial.text()
                 } else {
@@ -80,7 +52,6 @@ class __Partial {
 
     processRequest(response, _el) {
         return new Promise((resolve, reject) => {
-            // resolve(_el.innerHTML = response)
             if (_el.attributes.rel.value === "html") {
                 resolve(_el.outerHTML = response)
             } else {
@@ -93,38 +64,11 @@ class __Partial {
         try {
             const response = await this.makeRequest(url)
             const processedResponse = await this.processRequest(response, _el)
-        } catch(error) {
+            return processedResponse
+        } catch (error) {
             console.error(error)
         }
     }
 
 }
 
-
-
-// const dodoDo = new doDo()
-// dodoDo.dadaDa('./d.html');
-
-// const partial = new Partial()
-// partial.includeAll()
-
-
-
-
-
-
-// console.log(dodoDo.dadaDa('./d.html'));
-
-</script>
-
-
-<script src="./_dist/FetchPartial.js"></script>
-<script>
-
-
-const partial = new FetchPartial()
-partial.includeAll()
-</script>
-
-</body>
-</html>
