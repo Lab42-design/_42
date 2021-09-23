@@ -3,40 +3,83 @@
  * Returns a Promise that resolves when the DOM is ready
  * 
  */
-const documentReady = () => new Promise(resolve => {
 
-    const { readyState } = document
+let domResolve;
 
-    // resolve early if DOM is already ready
-    // document ready states: loading, interactive, complete
-    if (readyState === 'interactive' || readyState === 'complete') {
+const domReady = new Promise(function (resolve) {
+    // expose fulfilled state holder to outer scope
+    domResolve = resolve;
+});
 
-        document.removeEventListener("DOMContentLoaded", resolve);
-        return resolve()
+// add event listener and trigger resolve when ready
+document.addEventListener('DOMContentLoaded', domResolve);
 
+// init app when ready
+// domReady.then(initApp);
+
+
+
+
+
+class PromiseDom {
+
+    /////
+    constructor() {
+        this.documentReady()
     }
 
-    // otherwise, resolve when ready
-    document.addEventListener('DOMContentLoaded', resolve)
-})
 
-// export the Promise, not the generator
-const domready = documentReady()
-// export default singleton
+    dom() {
+
+        console.log('_____ dom')
+
+        var domResolve;
+        var domReady = new Promise(function (resolve) {
+            // expose fulfilled state holder to outer scope
+            domResolve = resolve;
+        });
+
+        // add event listener and trigger resolve when ready
+        document.addEventListener('DOMContentLoaded', domResolve);
 
 
+        // return new Promise((resolve, reject) => {
 
-const windowReady = () => new Promise(resolve => {
+        //     const { readyState } = document
+        //     // resolve early if DOM is already ready
+        //     // loading, interactive, complete
+        //     if (readyState === 'interactive' || readyState === 'complete') {
+        //         document.removeEventListener("DOMContentLoaded", resolve);
+        //         return resolve('dom ready')
+        //     }
+        //     // resolve when ready
+        //     document.addEventListener('DOMContentLoaded', resolve)
 
-    const { readyState } = document
-
-    // resolve early
-    if (readyState === 'complete') {
-        window.removeEventListener("load", resolve);
-        return resolve()
+        // })
     }
-    // otherwise, resolve when ready
-    window.addEventListener('load', resolve);
-})
 
-const winready = windowReady();
+    // _el: HTMLCollectionOf<any>
+    async documentReady() {
+
+        console.log('__documentReady')
+
+        try {
+            const response = await this.dom()
+            console.log(domReady)
+
+            domReady.then();
+            // const processedResponse: void = await this.processRequest(response, _el)
+            // console.log(response)
+            // return response
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    /////
+    // export the Promise, not the generator
+    // let domready = this.documentReady()
+
+}
+
+

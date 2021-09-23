@@ -3,7 +3,10 @@
  * Returns a Promise that resolves when the DOM is ready
  *
  */
-declare const documentReady: () => Promise<unknown>;
-declare const domready: Promise<unknown>;
-declare const windowReady: () => Promise<unknown>;
-declare const winready: Promise<unknown>;
+declare let domResolve: any;
+declare const domReady: Promise<unknown>;
+declare class PromiseDom {
+    constructor();
+    dom(): void;
+    documentReady(): Promise<void>;
+}

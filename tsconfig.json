@@ -13,7 +13,7 @@
     ]
   },
   "files": [
-    "_src/FetchPartial.ts",
+    "_src/PromiseDom.ts",
     // "_src/PromiseDom.ts"
   ],
 }

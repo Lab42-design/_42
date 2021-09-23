@@ -11,10 +11,10 @@
 </head>
 <body>
 
-
+    https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState
 
 <main>
-
+    https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState
 
 
     <link id="___D___01" rel="html" href="./d1.html" />
@@ -29,7 +29,7 @@
 
 </main>
 
-
+https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState
 
 <script>
 'use strict';
@@ -118,13 +118,100 @@ class __Partial {
 </script>
 
 
+
+<script src="./_dist/PromiseDom.js"></script>
+<script>
+
+await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+
+
+
+// https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState
+const ready = new PromiseDom('document_ready')
+
+
+
+function document_ready() {
+    console.log('______OK');
+};
+
+</script>
+
+
+
+
+
 <script src="./_dist/FetchPartial.js"></script>
 <script>
 
 
 const partial = new FetchPartial()
-partial.includeAll()
+partial.fetchAll()
 </script>
 
+
+<script>
+
+
+
+/**
+ * Await for this to run code after the DOM has been parsed and loaded (but not
+ * sub-resources like images, scripts, etc).
+ *
+ * The _passThrough arg is not for public use, it's for making data pass
+ * through in promise chains.
+ */
+function documentReady( _passThrough ) {
+
+if ( document.readyState === 'loading' ) {
+    return new Promise( resolve => {
+        document.addEventListener( 'DOMContentLoaded', () => resolve( _passThrough ) )
+    } )
+}
+
+return Promise.resolve( _passThrough )
+
+}
+
+export default documentReady
+export { documentReady }
+
+export const version = '2.0.1'
+
+//
+import documentReady from '@awaitbox/document-ready'
+
+async function main() {
+  await documentReady()
+  console.log( 'Ready to begin awesome!' )
+}
+
+main()
+
+
+
+//
+documentReady()
+  .then( data => console.log( 'begin awesome!' ) )
+
+
+
+  //
+  import documentReady from '@awaitbox/document-ready'
+
+fetch( ... )
+  .then( ... )
+  .then( documentReady ) // passes data through
+  .then( data => console.log( 'use data for the awesome!', data ) )
+
+
+
+</script>
 </body>
 </html>
+
+https://github.com/lukechilds/when-dom-ready/blob/master/src/index.js
+https://github.com/lukechilds/when-dom-ready/blob/master/src/index.js
+https://github.com/lukechilds/when-dom-ready/blob/master/src/index.js
+https://github.com/lukechilds/when-dom-ready/blob/master/src/index.js
+https://github.com/lukechilds/when-dom-ready/blob/master/src/index.js
