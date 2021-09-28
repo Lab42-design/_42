@@ -2,8 +2,8 @@
   "compileOnSave": true,
   "compilerOptions": {
     "sourceMap": true,
-    "declaration": true,
-    "importHelpers": true,
+    "declaration": false,
+    "importHelpers": false,
     "target": "es2018",
     "module": "amd",
     "outDir": "_dist",
@@ -13,7 +13,7 @@
     ]
   },
   "files": [
-    "_src/PromiseDom.ts",
-    // "_src/PromiseDom.ts"
+    "_src/FetchPartial.ts",
+    "_src/PromiseDom.ts"
   ],
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./ui/reset.css" />
+
+</head>
+<body>
+
+    <!-- https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState -->
+
+<main>
+    <!-- https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState -->
+
+    <link id="___D___01" rel="html" href="./d1.html" />
+
+    <link id="___D___02" rel="html" href="./d2.html" />
+
+    <link id="___D___03" rel="html" href="./d3.html" />
+
+
+
+</main>
+
+<!-- https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState -->
+
+
+
+
+
+<script src="./_dist/FetchPartial.js"></script>
+<script src="./_dist/PromiseDom.js"></script>
+
+
+<script>
+
+
+let dom = new PromiseDom()
+
+dom.deferred.then(() => start('one'))
+// deferred.then(() => start('two'))
+// deferred.then(() => start('three'))
+
+function start(message) {
+    console.log('___ startup script: ', message)
+
+    const partial = new FetchPartial()
+    partial.fetchAll()
+
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>
+
+<!-- https://github.com/lukechilds/when-dom-ready/blob/master/src/index.js
+https://github.com/lukechilds/when-dom-ready/blob/master/src/index.js
+https://github.com/lukechilds/when-dom-ready/blob/master/src/index.js
+https://github.com/lukechilds/when-dom-ready/blob/master/src/index.js
+https://github.com/lukechilds/when-dom-ready/blob/master/src/index.js -->

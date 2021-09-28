@@ -9,6 +9,9 @@
  *
  */
 class FetchPartial {
+    // static readonly url: string
+    // static readonly tagName: string = 'link'
+    // static readonly _el: HTMLCollectionOf<any>
     // constructor() {
     //     // this.partialTag = partialTag
     // }
@@ -62,5 +65,4 @@ class FetchPartial {
         }
     }
 }
-FetchPartial.tagName = 'link';
 //# sourceMappingURL=FetchPartial.js.map
