@@ -10,9 +10,9 @@
  */
 class FetchPartial {
 
-    static readonly url: string
-    static readonly tagName: string = 'link'
-    static readonly _el: HTMLCollectionOf<any>
+    // static readonly url: string
+    // static readonly tagName: string = 'link'
+    // static readonly _el: HTMLCollectionOf<any>
 
     // constructor() {
     //     // this.partialTag = partialTag
