@@ -6,14 +6,14 @@
     "importHelpers": false,
     "target": "es2018",
     "module": "amd",
-    "outDir": "_dist",
+    "outDir": "js",
     "lib": [
       "es2018",
       "dom"
     ]
   },
   "files": [
-    "_src/FetchPartial.ts",
-    "_src/PromiseDom.ts"
+    "src/FetchPartial.ts",
+    "src/PromiseDom.ts"
   ],
 }

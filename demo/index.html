@@ -90,8 +90,8 @@
 <!-- PARTIAL -->
 <section>
 
-    <div class="partial">
-        <!-- <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
+    <div id="0001" class="partial">
+        <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
             <g id="Circle">
             <circle cx="8" cy="8" r="7" stroke="currentColor" 
                 stroke-opacity="0.25" stroke-width="2" 
@@ -100,24 +100,28 @@
                 stroke-width="2" stroke-linecap="round" 
                 vector-effect="non-scaling-stroke" />
             </g>
-        </svg> -->
+        </svg>
         <link rel="html" href="./foo.html" />
     </div>
     
-    <div class="partial">
-        <!-- <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
+    <div id="0002" class="partial">
+        <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
             <use href="#Circle" />
-        </svg> -->
+        </svg>
         <link rel="html" href="./baz.html" />
     </div>
     
-    <div class="partial">
-        <!-- <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
+    <div id="0003" class="partial">
+        <svg width="32" height="32" viewBox="0 0 16 16" fill="none" class="anim-rotate">
             <use href="#Circle" />
-        </svg> -->
+        </svg>
         <link rel="html" href="./bar.html" />
     </div>
     
+
+    <link rel="html" href="./zip.html" />
+
+
 </section>
 <!-- PARTIAL -->
 
@@ -164,78 +168,39 @@
 
 
 <!-- _42 scripts -->
-<script module src="./../readyPromise/readyPromise.src.js"></script>
-<!-- <script module src="./../fetchHtml/fetchHtml.src.js"></script> -->
-<script module src="../_dist/FetchPartial.js"></script>
-
-<script>
-
-// add an appropriate event listener
-// window.addEventListener("htmlPartialsReady", function(e) { 
-//     console.log( 'htmlPartialsReady' );
-// });
-
-// create and dispatch the event
-// const event = new CustomEvent("htmlPartialsReady", {
-//     detail: {
-//         htmlPartialsReady: true
-//     }
-// });
-// window.dispatchEvent(event);
-
-</script>
-
-
-
+<script module src="../js/PromiseDom.js"></script>
+<script module src="../js/FetchPartial.js"></script>
 
 <script>
 
 
-Promise.all([domready, winready]).then(start_application);
 
+// check domready
+// if dom is readu call start_application()
+const dom = new PromiseDom()
+dom.deferred.then(() => start_application('starting'))
 
+// const partial = new FetchPartial()
 
+function start_application(message) {
 
-function start_application() {
-    console.log('documentResolve AND windowResolve OK');
+    console.log('______________________________')
+    console.log('start_application:', message)
 
-    // fetchHtml.all('link');
-
+    // include partials
     const partial = new FetchPartial()
     partial.fetchAll()
 
+    // do something ...
+    console.log('______________________________')
 
-
-
-};
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
 </script>
 
-<script debug language="javascript">
-// window.tdiff = []; fred = function(a,b){return a-b;};
-// window.document.onload = function(e){ 
-//     console.log("document.onload", e, Date.now() ,window.tdiff,  
-//     (window.tdiff[0] = Date.now()) && window.tdiff.reduce(fred) ); 
-// }
-// window.onload = function(e){ 
-//     console.log("window.onload", e, Date.now() ,window.tdiff, 
-//     (window.tdiff[1] = Date.now()) && window.tdiff.reduce(fred) ); 
-// }
-</script>
+
 
 </body>
 </html>

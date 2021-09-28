@@ -15,11 +15,13 @@ class PromiseDom {
     constructor() {
         this.deferred = new Promise(function (resolve, reject) {
             try {
+                // resolve early if DOM is already ready
+                // states: loading, interactive, complete
                 if (document.readyState === 'interactive' || document.readyState === 'complete') {
-                    Promise.resolve();
+                    return Promise.resolve();
                 }
                 else {
-                    document.addEventListener('DOMContentLoaded', () => resolve('resolved'), false);
+                    document.addEventListener('DOMContentLoaded', () => resolve(), false);
                 }
             }
             catch (error) {
