@@ -25,7 +25,7 @@ class PromiseDom {
                 document.addEventListener('DOMContentLoaded', () => resolve(), false)
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
 
     })
