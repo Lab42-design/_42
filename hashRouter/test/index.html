@@ -64,5 +64,49 @@ const router = new Router(
 );
 </script>
 
+
+
+
+<script>
+
+function getPageName() {
+    var
+        pathName = window.location.pathname,
+        pageName = ""
+
+        console.log("0____________ pathName : " + pathName)
+
+    if (pathName.indexOf("/") != -1) {
+
+        console.log("1____________ pathName : " + pathName)
+
+        pageName = pathName.split("#").pop()
+
+        console.log("1____________ pageName : " + pageName)
+
+
+
+
+    } else {
+        pageName = pathName
+        console.log("2____________ pathName : " + pathName)
+
+    }
+
+    return pageName;
+}
+
+
+getPageName()
+
+
+
+
+</script>
+
+
+
+
+
 </body>
 </html>
