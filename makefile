@@ -1,4 +1,4 @@
-all: greet
+all: greet js 42
 
 js: 
 	tsc

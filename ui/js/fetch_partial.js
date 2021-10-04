@@ -1,5 +1,9 @@
 /**
  *
+ * Searces dom all partial tags: <link rel="html" href="partial.html" />
+ * checks for rel="html" and href="partial.html" values
+ * and calls fetcOne()
+ *
  * usage
  *
  * <link rel="html" href="partial.html" />
@@ -14,15 +18,9 @@
  *
  */
 class FetchPartial {
-    // static readonly url: string
-    // static readonly tagName: string = 'link'
-    // static readonly _el: HTMLCollectionOf<any>
     // constructor() {
     //     // this.partialTag = partialTag
     // }
-    // Searces dom all partial tags: <link rel="html" href="partial.html" />
-    // checks for rel="html" and href="partial.html" values
-    // and calls fetcOne()
     async fetchAll(tagName) {
         if (tagName === undefined) {
             tagName = 'link';
@@ -38,20 +36,11 @@ class FetchPartial {
                 const url = partials[i].getAttribute('href');
                 this.fetc(url, partials[i]);
             }
-            else {
-                // reject('Tag ' + partials[i] + ' is not in the DOM')
-            }
+            // else {
+            // reject('Tag ' + partials[i] + ' is not in the DOM')
+            // }
         }
         // })
-        // for (let i: number = 0; i < partials.length; i++) {
-        //     if (partials[i].attributes.rel.value === 'html') {
-        //         const url = partials[i].getAttribute('href')
-        //         this.fetc(url, partials[i])
-        //     }
-        //     // else {
-        //     //     Promise.reject('Tag ' + partials[i] + ' is not in the DOM')
-        //     // }
-        // }
     }
     makeRequest(url) {
         return new Promise((resolve, reject) => {
@@ -67,17 +56,17 @@ class FetchPartial {
             });
         });
     }
+    // check if parent element is a loader for the partial
     processRequest(response, _el) {
         return new Promise((resolve, reject) => {
-            // typeof _el.parentNode.attributes.class === 'undefined'
-            // if (_el.parentNode.attributes.class === 'partial') {
-            //     resolve(_el.parentNode.parentNode.innerHTML = response)
-            // } else {
-            resolve(_el.outerHTML = response);
-            // }
+            if (_el.parentNode.classList && _el.parentNode.classList.contains('partial')) {
+                resolve(_el.parentNode.innerHTML = response);
+            }
+            else {
+                resolve(_el.outerHTML = response);
+            }
         });
     }
-    // _el: HTMLCollectionOf<any>
     async fetc(url, _el) {
         try {
             const response = await this.makeRequest(url);
