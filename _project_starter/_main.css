@@ -12,7 +12,6 @@ section {
     margin: 230px 0 0 0;
     background-color:rgba(105, 90, 205, 0.185);
     min-height: 10vh;
-    height: 100px;
 }
 
 h3::before, h4::before {
