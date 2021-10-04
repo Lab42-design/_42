@@ -26,21 +26,12 @@ class FetchPartial {
             tagName = 'link';
         }
         const partials = document.getElementsByTagName(tagName);
-        // return new Promise((resolve, reject) => {
-        // try {
-        // } catch (error) {
-        //     console.error(error)
-        // }
         for (let i = 0; i < partials.length; i++) {
             if (partials[i].attributes.rel.value === 'html') {
                 const url = partials[i].getAttribute('href');
                 this.fetc(url, partials[i]);
             }
-            // else {
-            // reject('Tag ' + partials[i] + ' is not in the DOM')
-            // }
         }
-        // })
     }
     makeRequest(url) {
         return new Promise((resolve, reject) => {
