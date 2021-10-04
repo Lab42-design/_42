@@ -89,4 +89,3 @@ class FetchPartial {
         }
     }
 }
-//# sourceMappingURL=FetchPartial.js.map

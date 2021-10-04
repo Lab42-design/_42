@@ -3,9 +3,7 @@
  **/
 
 /* Box sizing rules */
-*,
-*::before,
-*::after {
+html, *, *::before, *::after {
     box-sizing: border-box;
 }
 

@@ -9,9 +9,11 @@
  * dom.then(() => start('one'))
  * dom.then(() => start('two'))
  * etc...
+ *
  * function start(message) {
  *     console.log('___ startup script: ', message)
  * }
+ *
  */
 class PromiseDom {
     constructor() {
@@ -28,4 +30,3 @@ class PromiseDom {
         });
     }
 }
-//# sourceMappingURL=PromiseDom.js.map

@@ -1,19 +1,19 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": false,
     "importHelpers": false,
     "target": "es2018",
     "module": "amd",
-    "outDir": "js",
+    "outDir": "ui/js",
     "lib": [
       "es2018",
       "dom"
     ]
   },
   "files": [
-    "src/FetchPartial.ts",
-    "src/PromiseDom.ts"
+    "src/fetch_partial.ts",
+    "src/promise_dom.ts"
   ],
 }
