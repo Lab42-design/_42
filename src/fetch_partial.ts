@@ -30,12 +30,13 @@ class FetchPartial {
         }
 
         const partials = document.getElementsByTagName(tagName)
-            for (let i: number = 0; i < partials.length; i++) {
-                if (partials[i].attributes.rel.value === 'html') {
-                    const url = partials[i].getAttribute('href')
-                    this.fetc(url, partials[i])
-                } 
-            }
+
+        for (let i: number = 0; i < partials.length; i++) {
+            if (partials[i].attributes.rel.value === 'html') {
+                const url = partials[i].getAttribute('href')
+                this.fetc(url, partials[i])
+            } 
+        }
     }
 
     makeRequest(url: string): Promise<string> {
