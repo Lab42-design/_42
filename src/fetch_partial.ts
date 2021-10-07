@@ -2,19 +2,24 @@
  * 
  * Searces dom all partial tags: <link rel="html" href="partial.html" />
  * checks for rel="html" and href="partial.html" values
- * and calls fetcOne()
  * 
  * usage
  * 
- * <link rel="html" href="partial.html" />
+ * html
  * 
- * const partial = new FetchPartial()
- * partial.fetchAll()
+ * <link rel="html" href="partial.html" />
  * 
  * or use it with a wrapper
  * <div class="partial">
  *     <link rel="html" href="./baz.html" />
  * </div>
+ * 
+ * js
+ * 
+ * then check if dom ise ready and..
+ * 
+ * const partial = new FetchPartial()
+ * partial.fetchAll()
  * 
  */
 class FetchPartial {
