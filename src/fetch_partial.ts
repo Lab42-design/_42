@@ -12,16 +12,17 @@
  * partial.fetchAll()
  * 
  * or use it with a wrapper
- *  <div class="partial">
- *       <link rel="html" href="./baz.html" />
- *  </div>
+ * <div class="partial">
+ *     <link rel="html" href="./baz.html" />
+ * </div>
  * 
  */
 class FetchPartial {
 
-    // constructor() {
-    //     // this.partialTag = partialTag
-    // }
+    constructor() {
+        // this.partialTag = partialTag
+        console.log('_________________FetchPartial')
+    }
 
     async fetchAll(tagName?) {
 
@@ -34,8 +35,8 @@ class FetchPartial {
         for (let i: number = 0; i < partials.length; i++) {
             if (partials[i].attributes.rel.value === 'html') {
                 const url = partials[i].getAttribute('href')
-                this.fetc(url, partials[i])
-            } 
+                this.fetch(url, partials[i])
+            }
         }
     }
 
@@ -64,7 +65,7 @@ class FetchPartial {
         })
     }
 
-    async fetc(url: string, _el: HTMLCollectionOf<any>): Promise<void> {
+    async fetch(url: string, _el: HTMLCollectionOf<any>): Promise<void> {
         try {
             const response = await this.makeRequest(url)
             const processedResponse: void = await this.processRequest(response, _el)

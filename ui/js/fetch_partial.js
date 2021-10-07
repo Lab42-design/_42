@@ -12,15 +12,16 @@
  * partial.fetchAll()
  *
  * or use it with a wrapper
- *  <div class="partial">
- *       <link rel="html" href="./baz.html" />
- *  </div>
+ * <div class="partial">
+ *     <link rel="html" href="./baz.html" />
+ * </div>
  *
  */
 class FetchPartial {
-    // constructor() {
-    //     // this.partialTag = partialTag
-    // }
+    constructor() {
+        // this.partialTag = partialTag
+        console.log('_________________FetchPartial');
+    }
     async fetchAll(tagName) {
         if (tagName === undefined) {
             tagName = 'link';
@@ -29,7 +30,7 @@ class FetchPartial {
         for (let i = 0; i < partials.length; i++) {
             if (partials[i].attributes.rel.value === 'html') {
                 const url = partials[i].getAttribute('href');
-                this.fetc(url, partials[i]);
+                this.fetch(url, partials[i]);
             }
         }
     }
@@ -58,7 +59,7 @@ class FetchPartial {
             }
         });
     }
-    async fetc(url, _el) {
+    async fetch(url, _el) {
         try {
             const response = await this.makeRequest(url);
             const processedResponse = await this.processRequest(response, _el);
