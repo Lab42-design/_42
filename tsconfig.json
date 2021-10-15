@@ -14,6 +14,7 @@
   },
   "files": [
     "src/fetch_partial.ts",
-    "src/promise_dom.ts"
+    "src/promise_dom.ts",
+    // "src/_42.ts"
   ],
 }

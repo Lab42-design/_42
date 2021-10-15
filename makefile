@@ -14,3 +14,11 @@ modules = ${srcdir}fetch_partial.js\
 
 42: 
 	uglifyjs --compress -- ${modules} > ui/js/42.js
+
+
+.PHONY: clean
+clean:
+#   rm -rf *.o
+
+
+# rollup.js
