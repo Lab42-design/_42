@@ -1,0 +1,128 @@
+/* defaults */
+a {
+    text-decoration: none;
+    color: white;
+}
+
+
+
+
+body {
+
+    background-color: rgb(217, 219, 190);
+
+}
+
+
+nav {
+    background-color: aquamarine;
+}
+
+#mainmenu {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
+    background-color: bisque;
+    padding: 30px;
+}
+
+ li {
+    padding: 4rem;
+    font-size: 6rem;
+    background-color: blueviolet;
+    border: 1px solid white;
+}
+
+#mainmenu li:first-child {
+    background-color: rgb(180, 43, 226);
+}
+#mainmenu li:nth-child(2) {
+}
+#mainmenu li:nth-child(3) {
+    background-color: rgb(226, 43, 211);
+}
+#mainmenu li:last-child {
+    background-color: rgb(180, 43, 226);
+}
+
+#mainmenu li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+
+
+#submenu li {
+    font-size: 3rem;
+    background-color: cadetblue;
+}
+
+
+
+/* ul#submenu {
+    font-size: 1rem;
+    background-color: cadetblue;
+}
+
+ul#submenu li {
+    font-size: 1rem;
+    background-color: cadetblue;
+}
+
+ul#submenu {
+    font-size: 1rem;
+    background-color: cadetblue;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+.toggle-menu {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    left: 0;
+    padding: 0;
+    padding: var(--spacer);
+    position: absolute;
+    top: 0
+}
+.toggle-menu:focus {
+    outline: 0
+}
+
+
+
+
+
+
+
+
+.visually-hidden, .visually-hidden-focusable:not(:focus):not(:focus-within) {
+    clip: rect(0, 0, 0, 0) !important;
+    border: 0 !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important
+}
+ */
+
