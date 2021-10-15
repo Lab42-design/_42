@@ -5,6 +5,10 @@ a {
 }
 
 
+:root {
+    --spacer: 20px;
+}
+
 
 
 body {
@@ -19,22 +23,31 @@ nav {
 }
 
 #mainmenu {
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: flex-start;
 	align-items: flex-start;
 	align-content: flex-start;
     background-color: bisque;
-    padding: 30px;
+    padding: 50px;
 }
 
- li {
-    padding: 4rem;
+#mainmenu li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
+
     font-size: 6rem;
     background-color: blueviolet;
     border: 1px solid white;
+    /* padding: 3rem; */
 }
+
+
 
 #mainmenu li:first-child {
     background-color: rgb(180, 43, 226);
@@ -48,20 +61,28 @@ nav {
     background-color: rgb(180, 43, 226);
 }
 
-#mainmenu li {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    align-content: stretch;
+
+
+nav a {
+    display: block;
+    background:rgb(126, 196, 34);
+    padding: 1rem;
 }
 
 
 
+
 #submenu li {
-    font-size: 3rem;
-    background-color: cadetblue;
+
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
+    
+    font-size: 2rem;
+    /* background-color: cadetblue; */
 }
 
 
