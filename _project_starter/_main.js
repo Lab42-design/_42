@@ -1,5 +1,17 @@
 
 
+
+for( let i = 0; i < 1000000000; i++)
+{
+// This synchronous script is going to delay parsing of the DOM,
+// so the DOMContentLoaded event is going to launch later.
+} 
+
+
+
+
+
+
 // check if dom is ready
 const dom = new PromiseDom()
 dom.deferred.then(() => launch('starting'))
