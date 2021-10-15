@@ -16,6 +16,11 @@
  * 
  */
 class PromiseDom {
+
+    constructor() {
+        console.log('_42 / PromiseDom')
+    }
+
     deferred = new Promise<void>(function (resolve, reject) {
         try {
             if (document.readyState === 'interactive' || document.readyState === 'complete') {

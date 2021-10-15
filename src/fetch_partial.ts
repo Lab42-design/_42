@@ -25,8 +25,7 @@
 class FetchPartial {
 
     constructor() {
-        // this.partialTag = partialTag
-        console.log('_________________FetchPartial')
+        console.log('_42 / FetchPartial')
     }
 
     async fetchAll(tagName?) {
@@ -51,7 +50,7 @@ class FetchPartial {
                 if (partial.status == 200) {
                     return partial.text()
                 } else {
-                    reject('Partial ' + url + 'not found')
+                    reject('Partial ' + url + ' not found')
                 }
             }).then(html => {
                 resolve(html)
@@ -72,7 +71,7 @@ class FetchPartial {
 
     async fetch(url: string, _el: HTMLCollectionOf<any>): Promise<void> {
         try {
-            const response = await this.makeRequest(url)
+            const response: string = await this.makeRequest(url)
             const processedResponse: void = await this.processRequest(response, _el)
             return processedResponse
         } catch (error) {
@@ -81,4 +80,3 @@ class FetchPartial {
     }
 
 }
-
