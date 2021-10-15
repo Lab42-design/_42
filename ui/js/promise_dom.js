@@ -28,5 +28,6 @@ class PromiseDom {
                 console.error(error);
             }
         });
+        console.log('_42 / PromiseDom');
     }
 }

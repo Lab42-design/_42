@@ -24,8 +24,7 @@
  */
 class FetchPartial {
     constructor() {
-        // this.partialTag = partialTag
-        console.log('_________________FetchPartial');
+        console.log('_42 / FetchPartial');
     }
     async fetchAll(tagName) {
         if (tagName === undefined) {
@@ -46,7 +45,7 @@ class FetchPartial {
                     return partial.text();
                 }
                 else {
-                    reject('Partial ' + url + 'not found');
+                    reject('Partial ' + url + ' not found');
                 }
             }).then(html => {
                 resolve(html);
