@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        .bananas {
+  margin-bottom: .5em;
+  padding: 0.25em;
+  background: #ffff99;
+}
+
+.found {
+  background: tomato;
+  color: bisque;
+}
+    </style>
+
+<div id="container"></div>
+
+
+
+
+<script>
+// Waits for a node that passes testFn to appear and returns it.
+// Gives up and rejects after 'wait' ms.
+// Returns a Promise that resolves with the found node.
+const waitForElement = (testFn, wait = 1000) => { // 1
+
+    return new Promise((resolve, reject) => { // 2
+
+        // create an observer using onDomChange (defined below)
+        // watch the container for childList changes
+        const observer = new MutationObserver(onDomChange)
+        observer.observe(container, {
+            childList: true
+        })
+
+        // set a countdown to give up and reject
+        const timeout = setTimeout( () => {
+                observer.disconnect()                   // when the timeout expires, stop watching…
+                reject('Never showed up.')              // and reject
+            },
+            wait                                        // how long to wait before rejecting
+        )
+
+        // the callback for observed dom changes
+        function onDomChange(mutations, observer) {
+
+            console.log('onDomChange---')
+
+
+            // find an addedNode that passes the testFn in the mutations
+            const node = mutations.map(m => [...m.addedNodes]).flat().find(testFn);
+
+            // if we find a match…
+            if (node) {
+
+                console.log('node---')
+
+                // stop the rejection timeout
+                clearTimeout(timeout);
+
+                // stop observing
+                observer.disconnect();
+
+                // and resolve with the found node
+                resolve(node);
+            }
+        }
+
+
+    }) // 2
+
+
+} // 1
+
+
+
+
+
+
+// convenience for creating a div with the given text
+const d = (text) => {
+const el = document.createElement('div');
+    el.className = 'bananas';
+    el.innerText = text;
+    return el;
+}
+
+
+
+
+
+
+
+
+// test the waitForElement with the given delay
+async function go(delay) {
+
+    const container = document.getElementById('container');
+
+    // wait for the specified duration before adding a div with the delay as the text
+    // setTimeout(() => container.appendChild(d(delay)), delay);
+    setTimeout( function(){
+        container.appendChild(d(delay))
+    }, delay)
+
+    try {
+        // wait for the element to appear
+        const el = await waitForElement(n => n.innerText.endsWith(delay))
+        // append some text to the content
+        el.innerText += ' - found it.'
+        // add a css class
+        el.classList.add('found');
+
+    } catch (e) {
+        // log an error if it didn't appear in time
+        console.error(`rejected for ${delay}`);
+    }
+
+}
+
+// default wait time is 1000ms, so…
+go(300); // under the 1000ms wait time. finds it.
+go(5000); // takes too long. rejects
+go(100); // finds it.
+go(600); // finds it.
+go(3000); // rejects
+
+</script>
+</body>
+</html>
