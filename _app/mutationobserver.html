@@ -54,7 +54,6 @@ const waitForElement = (testFn, wait = 1000) => { // 1
 
             console.log('onDomChange---')
 
-
             // find an addedNode that passes the testFn in the mutations
             const node = mutations.map(m => [...m.addedNodes]).flat().find(testFn);
 

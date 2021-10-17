@@ -4,32 +4,45 @@
 
 // DEBUG
 // DELAY
-for (let i = 0; i < 1000000000; i++) {
+for (let i = 0; i < 100000000; i++) {
     // launch DOM later.
 }
 
 
 
-// check if dom is ready
+// CHECK DOM
 const dom = new PromiseDom()
-dom.deferred.then(() => launch('starting'))
+dom.deferred.then(() => launch('XXXXX__starting'))
+
+
 
 // LAUNCH
 function launch(message) {
-    _include_partials()
-    ___observe()
+
+    console.log(message)
+
+    // 01 html partials
+    include_html_partials()
+
+    // 99 observe dom for changes if any
+    // ___observe('partials')
+
 }
 
+
+
+
 // PARTIALS
-function _include_partials() {
+function include_html_partials() {
     const partial = new FetchPartial()
     partial.fetchAll()
 }
 
 // OBSERVE
-function ___observe() {
+function ___observe(_el) {
 
-    const target = document.getElementById('partials')
+    // const target = document.getElementById(_el)
+    const target = document.body
     // getElementsByTagName
     // getElementsByClassName
     // const target = document.getElementsByTagName("body")
@@ -38,8 +51,7 @@ function ___observe() {
     const observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
             console.log('mutations')
-            _include_partials()
-            // target.style.color = target.innerText;
+            include_html_partials()
         });
     });
 
