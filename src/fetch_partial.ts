@@ -38,26 +38,11 @@ class FetchPartial {
             _selector = 'link[rel="html"]'
         }
 
-        // const partials = document.getElementsByTagName(tagName)
         const partials: NodeListOf<any> = document.querySelectorAll(_selector);
 
-        // console.log('______PARTIALS')
-        // console.log(partials)
-        // console.log(partialsTwo)
-        // console.log('______PARTIALS')
-
         for (let i: number = 0; i < partials.length; i++) {
-            // if (partials[i].hasAttribute('rel' && 'href')) {
-            //     let attribute = partials[i].getAttribute('rel')
-            //     if (attribute === 'html') {
-            //         const url = partials[i].getAttribute('href')
-            //         this.fetch(url, partials[i])
-            //     }
-            // }
-            // if (partials[i].attributes.rel.value === 'html') {
             const url = partials[i].getAttribute('href')
             this.fetch(url, partials[i])
-            // }
         }
     }
 

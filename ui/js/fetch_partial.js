@@ -21,6 +21,10 @@
  * const partial = new FetchPartial()
  * partial.fetchAll()
  *
+ * dom element selector default is: 'link[rel="html"]'
+ *
+ * partial.fetchAll( 'link[rel="html"]' )
+ *
  */
 class FetchPartial {
     constructor() {
@@ -30,24 +34,10 @@ class FetchPartial {
         if (_selector === undefined) {
             _selector = 'link[rel="html"]';
         }
-        // const partials = document.getElementsByTagName(tagName)
         const partials = document.querySelectorAll(_selector);
-        // console.log('______PARTIALS')
-        // console.log(partials)
-        // console.log(partialsTwo)
-        // console.log('______PARTIALS')
         for (let i = 0; i < partials.length; i++) {
-            // if (partials[i].hasAttribute('rel' && 'href')) {
-            //     let attribute = partials[i].getAttribute('rel')
-            //     if (attribute === 'html') {
-            //         const url = partials[i].getAttribute('href')
-            //         this.fetch(url, partials[i])
-            //     }
-            // }
-            // if (partials[i].attributes.rel.value === 'html') {
             const url = partials[i].getAttribute('href');
             this.fetch(url, partials[i]);
-            // }
         }
     }
     makeRequest(url) {
