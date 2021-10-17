@@ -63,7 +63,12 @@ class FetchPartial {
     // check if parent element is a loader for the partial
     processRequest(response, _el): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            if (_el.parentNode && _el.parentNode.classList && _el.parentNode.classList.contains('partial')) {
+
+            // const partials = document.querySelectorAll('link[rel="html"]');
+
+            // if (_el.parentNode && _el.parentNode.classList && _el.parentNode.classList.contains('partial')) {
+
+            if (_el.parentNode && _el.parentNode.classList.contains('partial')) {
                 resolve(_el.parentNode.innerHTML = response)
             } else {
                 resolve(_el.outerHTML = response)
