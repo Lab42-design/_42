@@ -21,6 +21,10 @@
  * const partial = new FetchPartial()
  * partial.fetchAll()
  * 
+ * dom element selector default is: 'link[rel="html"]'
+ * 
+ * partial.fetchAll( 'link[rel="html"]' )
+ * 
  */
 class FetchPartial {
 
@@ -28,19 +32,32 @@ class FetchPartial {
         console.log('_42 / FetchPartial')
     }
 
-    async fetchAll(tagName?) {
+    async fetchAll(_selector?) {
 
-        if (tagName === undefined) {
-            tagName = 'link'
+        if (_selector === undefined) {
+            _selector = 'link[rel="html"]'
         }
 
-        const partials = document.getElementsByTagName(tagName)
+        // const partials = document.getElementsByTagName(tagName)
+        const partials: NodeListOf<any> = document.querySelectorAll(_selector);
+
+        // console.log('______PARTIALS')
+        // console.log(partials)
+        // console.log(partialsTwo)
+        // console.log('______PARTIALS')
 
         for (let i: number = 0; i < partials.length; i++) {
-            if (partials[i].attributes.rel.value === 'html') {
-                const url = partials[i].getAttribute('href')
-                this.fetch(url, partials[i])
-            }
+            // if (partials[i].hasAttribute('rel' && 'href')) {
+            //     let attribute = partials[i].getAttribute('rel')
+            //     if (attribute === 'html') {
+            //         const url = partials[i].getAttribute('href')
+            //         this.fetch(url, partials[i])
+            //     }
+            // }
+            // if (partials[i].attributes.rel.value === 'html') {
+            const url = partials[i].getAttribute('href')
+            this.fetch(url, partials[i])
+            // }
         }
     }
 
@@ -74,7 +91,8 @@ class FetchPartial {
         })
     }
 
-    async fetch(url: string, _el: HTMLCollectionOf<any>): Promise<void> {
+    // HTMLCollectionOf<any>
+    async fetch(url: string, _el: NodeListOf<any>): Promise<void> {
         try {
             const response: string = await this.makeRequest(url)
             const processedResponse: void = await this.processRequest(response, _el)
@@ -83,5 +101,13 @@ class FetchPartial {
             console.error(error)
         }
     }
+
+    // _getContainer(link) {
+    //     let container = link.getAttribute(this._config.containerAttr)
+    //     if (!container) {
+    //         container = this._config.defaultContainer
+    //     }
+    //     return container
+    // }
 
 }
