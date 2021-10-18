@@ -21,54 +21,63 @@
 }
     </style>
 
-<div id="container"></div>
+<div id="container">
 
 
 
+        <link rel="html" href="./partials/header.html" />
+
+        <link rel="html" href="./partials/demo.html" />
+
+        <link rel="html" href="./partials/footer.html" />
+
+
+
+
+</div>
+
+
+<!-- _42 js -->
+<script module src="../ui/js/promise_dom.js"></script>
+<script module src="../ui/js/fetch_partial.js"></script>
+
+<!-- app js -->
+<!-- <script module src="./rsrc/app.js"></script> -->
 
 <script>
 // Waits for a node that passes testFn to appear and returns it.
 // Gives up and rejects after 'wait' ms.
 // Returns a Promise that resolves with the found node.
-const waitForElement = (testFn, wait = 1000) => { // 1
+const waitForElement = (testFn, wait = 1000) => {
+    return new Promise((resolve, reject) => {
 
-    return new Promise((resolve, reject) => { // 2
-
-        // create an observer using onDomChange (defined below)
-        // watch the container for childList changes
         const observer = new MutationObserver(onDomChange)
         observer.observe(container, {
             childList: true
         })
 
         // set a countdown to give up and reject
+        // when the timeout expires, stop watching…
+        // and reject
         const timeout = setTimeout( () => {
-                observer.disconnect()                   // when the timeout expires, stop watching…
-                reject('Never showed up.')              // and reject
+                observer.disconnect()               
+                reject('Never showed up.')          
             },
-            wait                                        // how long to wait before rejecting
+            wait // how long to wait before rejecting
         )
 
         // the callback for observed dom changes
         function onDomChange(mutations, observer) {
-
-            console.log('onDomChange---')
+            console.log('---callback---onDomChange---')
 
             // find an addedNode that passes the testFn in the mutations
             const node = mutations.map(m => [...m.addedNodes]).flat().find(testFn);
 
             // if we find a match…
             if (node) {
-
-                console.log('node---')
-
-                // stop the rejection timeout
+                console.log('---found---node---')
                 clearTimeout(timeout);
-
-                // stop observing
                 observer.disconnect();
-
-                // and resolve with the found node
                 resolve(node);
             }
         }
@@ -95,20 +104,40 @@ const el = document.createElement('div');
 
 
 
+/////////
+// CHECK DOM
+const dom = new PromiseDom()
+dom.ready.then(() => launch('_________ launching application'))
 
+// LAUNCH
+function launch(message) {
+    console.log(message)
+    include_html_partials()
+}
+
+// PARTIALS
+function include_html_partials() {
+    const partial = new FetchPartial()
+    partial.fetchAll()
+}
+/////////
 
 
 
 // test the waitForElement with the given delay
 async function go(delay) {
 
+    // document.querySelectorAll('link[rel="html"]')
+
     const container = document.getElementById('container');
 
     // wait for the specified duration before adding a div with the delay as the text
     // setTimeout(() => container.appendChild(d(delay)), delay);
-    setTimeout( function(){
-        container.appendChild(d(delay))
-    }, delay)
+    // setTimeout( function(){
+    //     container.appendChild(d(delay))
+    // }, delay)
+    include_html_partials()
+    
 
     try {
         // wait for the element to appear
@@ -119,7 +148,6 @@ async function go(delay) {
         el.classList.add('found');
 
     } catch (e) {
-        // log an error if it didn't appear in time
         console.error(`rejected for ${delay}`);
     }
 
