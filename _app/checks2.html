@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="./rsrc/icons/favicon.ico" sizes="any" /><!-- 32×32 -->
+
+
+    <title>Document</title>
+</head>
+<body>
+
+<style>
+    div, 
+#someWidget {
+    /* background-color: blueviolet; */
+    width: 500px;
+    height: 500px;
+}
+
+
+.mystyle {
+    background-color: blueviolet;
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+}
+
+.mystyle2 {
+    background-color: #AD310B;
+}
+
+.mystyle3 {
+  width: 300px;
+  height: 200px;
+  background: red;
+  animation: rainbow-bg 25s infinite;
+}
+
+@keyframes rainbow-bg{
+		100%, 0% { background-color: rgb(255,0,0); }
+		      8% { background-color: rgb(255,127,0); }
+		     16% { background-color: rgb(255,255,0); }
+		     32% { background-color: rgb(0,255,0); }
+		     40% { background-color: rgb(0,255,255); }
+		     58% { background-color: rgb(0,127,255); }
+		     66% { background-color: rgb(0,0,255); }
+		     75% { background-color: rgb(127,0,255); }
+		     83% { background-color: rgb(255,0,255); }
+		     91% { background-color: rgb(255,0,127); }
+}
+
+
+
+
+</style>
+
+<div id="someWidget" class="mystyle">
+
+    someWidget
+    someWidget
+    someWidget
+
+</div>
+
+<div class="zzz" id="01">
+    <link rel="html" href="./partials/header.html" />
+</div>
+
+<div class="zzz" id="02">
+    <link rel="html" href="./partials/content.html" />
+</div>
+
+<div class="zzz" id="03">
+    <link rel="html" href="./partials/footer.html" />
+</div>
+
+
+<script>
+    console.clear();
+</script>
+
+<!-- _42 js -->
+<script module src="../ui/js/promise_dom.js"></script>
+<script module src="../ui/js/fetch_partial.js"></script>
+
+<!-- app js -->
+<script module src="./rsrc/app.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+    // https://asontu.github.io/2020/12/30/mutationobserver-promise-made-easy.html
+/**
+ * Runs "trigger" function after setting up MutationObserver and (optionally) Timeout
+ * that respectively resolve or reject the Promise. The resolve function gets an array
+ * (not NodeList) of elements that were added as argument. If the trigger function
+ * returns true the Promise is immediately resolved with an empty array, without waiting
+ * for a Mutation.
+ *
+ * @param {Function} trigger Function to run after setting up MutationObserver and Timeout.
+ * @param {Object} watch DOM Element to watch for Mutations.
+ * @param {string} [query=*] Selector query that elements added in the Observed Mutation must match.
+ * @param {Object} [options={attributes:false, childList: true, subtree: false}] Options passed to MutationObserver.
+ * @param {int=} timeout Milliseconds after which the Promise should reject. If ommitted no Timeout is set.
+ * @returns {Promise} Promise object represents the added elements
+ */
+ function mop(trigger, watch, query, options, timeout) {
+	return new Promise((resolve, reject) => {
+		let timer;
+		let observer = new MutationObserver((mutationList) => {
+			let any = searchMutationListFor(mutationList, query || '*');
+			if (query && !any) {
+				return;
+			}
+			observer.disconnect();
+			clearTimeout(timer);
+			resolve(any);
+		});
+		observer.observe(watch, options || {attributes:false, childList: true, subtree: false});
+		if (timeout) {
+			timer = setTimeout(() => {
+				observer.disconnect();
+				reject(new Error('Timed out observing mutation'));
+			}, timeout);
+		}
+		if (trigger()) {
+			observer.disconnect();
+			clearTimeout(timer);
+			resolve([]);
+		}
+	});
+}
+/**
+ * Searches mutations from MutationObserver for elements matching a query. Returns
+ * either false or an array with found matching elements.
+ *
+ * @param {Object[]} mutationList List of Mutations as passed to MutationObserver's callback.
+ * @param {string} [query] Selector query that elements added in the Observed Mutation must match.
+ * @returns {false|Object[]}
+ */
+function searchMutationListFor(mutationList, query) {
+	if (!mutationList.length) {
+		return false;
+	}
+	let foundNodes = [];
+	function findNodes(addedNode) {
+		if (addedNode.matches(query)) {
+			foundNodes.push(addedNode);
+		}
+		foundNodes = foundNodes.concat(Array.from(addedNode.querySelectorAll(query)));
+	}
+	for (let m = 0; m < mutationList.length; m++) {
+		if (!mutationList[m].addedNodes.length) continue;
+		Array.from(mutationList[m].addedNodes)
+			.filter(nod => nod.nodeType == 1)
+			.forEach(findNodes);
+	}
+	if (!foundNodes.length) {
+		return false;
+	}
+	return foundNodes;
+}
+
+
+
+mop(trig, document.body, 'link', null, 5000)
+
+function trig() {
+    console.log(trig)
+}
+
+
+// function zzz(itemId) {
+// 	return mop(function() {
+// 		// let nodeToClick = document.querySelector(`a#Tree_Node_${itemId}.scContentTreeNodeNormal`);
+//         // let nodeToClick = document.querySelector('.zzz');
+// 		// if (!nodeToClick) {
+// 		// 	document.getElementById('TreeSearch').value = itemId;
+// 		// 	return true;
+// 		// }
+// 		// nodeToClick.click();
+// 	},
+// 	document.getElementById('ContentEditor'),
+//         '#EditorTabs .scEditorHeaderVersionsLanguage',
+//         {attributes:false, childList: true, subtree: true},
+// 	2000);
+// }
+
+// zzz()
+
+</script>
+
+
+
+
+
+</body>
+</html>

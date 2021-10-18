@@ -23,7 +23,7 @@ class PromiseDom {
 
     ready = new Promise<void>(function (resolve, reject) {
 
-        let _state : DocumentReadyState = document.readyState
+        const _state : DocumentReadyState = document.readyState
 
         try {
             if (_state === 'interactive' || _state === 'complete') {

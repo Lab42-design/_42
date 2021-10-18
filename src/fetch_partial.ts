@@ -38,7 +38,7 @@ class FetchPartial {
             _selector = 'link[rel="html"]'
         }
 
-        const partials: NodeListOf<any> = document.querySelectorAll(_selector);
+        const partials: NodeListOf<any> = document.querySelectorAll(_selector)
 
         for (let i: number = 0; i < partials.length; i++) {
             const url = partials[i].getAttribute('href')

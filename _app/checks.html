@@ -4,9 +4,92 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="./rsrc/icons/favicon.ico" sizes="any" /><!-- 32×32 -->
+
+
     <title>Document</title>
 </head>
 <body>
+
+<style>
+    div, 
+#someWidget {
+    /* background-color: blueviolet; */
+    width: 500px;
+    height: 500px;
+}
+
+
+.mystyle {
+    background-color: blueviolet;
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+}
+
+.mystyle2 {
+    background-color: #AD310B;
+}
+
+.mystyle3 {
+  width: 300px;
+  height: 200px;
+  background: red;
+  animation: rainbow-bg 25s infinite;
+}
+
+@keyframes rainbow-bg{
+		100%, 0% { background-color: rgb(255,0,0); }
+		      8% { background-color: rgb(255,127,0); }
+		     16% { background-color: rgb(255,255,0); }
+		     32% { background-color: rgb(0,255,0); }
+		     40% { background-color: rgb(0,255,255); }
+		     58% { background-color: rgb(0,127,255); }
+		     66% { background-color: rgb(0,0,255); }
+		     75% { background-color: rgb(127,0,255); }
+		     83% { background-color: rgb(255,0,255); }
+		     91% { background-color: rgb(255,0,127); }
+}
+
+
+
+
+</style>
+
+<div id="someWidget" class="mystyle">
+
+    someWidget
+    someWidget
+    someWidget
+
+</div>
+
+<div class="zzz" id="01">
+    <link rel="html" href="./partials/header.html" />
+</div>
+
+<div class="zzz" id="02">
+    <link rel="html" href="./partials/content.html" />
+</div>
+
+<div class="zzz" id="03">
+    <link rel="html" href="./partials/footer.html" />
+</div>
+
+
+<script>
+    console.clear();
+</script>
+
+<!-- _42 js -->
+<script module src="../ui/js/promise_dom.js"></script>
+<script module src="../ui/js/fetch_partial.js"></script>
+
+<!-- app js -->
+<script module src="./rsrc/app.js"></script>
+
+
 
 
 
@@ -16,23 +99,90 @@
 
 
 <script>
+// MIT Licensed
+// Author: jwilson8767
+// https://gist.github.com/jwilson8767/db379026efcbd932f64382db4b02853e
+/**
+ * Waits for an element satisfying selector to exist, then resolves promise with the element.
+ * Useful for resolving race conditions.
+ *
+ * @param selector
+ * @returns {Promise}
+ */
+function elementReady(_selector) {
 
-function supportsTemplate() {
-    return 'content' in document.createElement('template');
+    return new Promise((resolve, reject) => {
+
+        let _el = document.querySelector(_selector)
+        if (_el) {
+            resolve(_el)
+        }
+
+        const observer = new MutationObserver((mutationRecords, observer) => {
+
+            console.log(mutationRecords)
+
+            // resolve(eee)
+            // for (let i = 0; i < eee.length; i++) {
+            //     console.log('for in loop')
+            //     console.log(eee.length)
+                // resolve(eee[i])
+                // const id = _selector[i].getAttribute('id')
+                // console.log(id)
+                // const url = partials[i].getAttribute('href')
+                // this.fetch(url, partials[i])
+                // observer.disconnect() 
+            // }
+
+            Array.from(document.querySelectorAll(_selector)).forEach((element) => {
+                resolve(element);
+                observer.disconnect() 
+            })
+
+
+            const element = document.querySelector(_selector);
+            if (element) {
+                resolve(element);
+                observer.disconnect();
+            }
+
+            // observer.disconnect();
+
+        })
+
+        
+
+        observer.observe(document.documentElement, {
+            childList: true,
+            subtree: true
+        })
+
+
+
+    })
 }
 
-if (supportsTemplate()) {
+// console.log('elementReady elementReady elementReady')
+// Simple usage to delete an element if/when it exists:
+elementReady('.zzz').then( 
 
-    // Good to go!
-    console.log('supported')
+    (dosomething) => {
+        dosomething.classList.toggle("mystyle3")
+    }
 
-} else {
+)
 
-    // Use old templating techniques or libraries.
-    console.log('not supported')
-    
-}
+
+
+
+
+
 
 </script>
+
+
+
+
+
 </body>
 </html>

@@ -18,7 +18,7 @@
 class PromiseDom {
     constructor() {
         this.ready = new Promise(function (resolve, reject) {
-            let _state = document.readyState;
+            const _state = document.readyState;
             try {
                 if (_state === 'interactive' || _state === 'complete') {
                     return Promise.resolve();
