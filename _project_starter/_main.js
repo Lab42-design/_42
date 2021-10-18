@@ -10,7 +10,7 @@ for( let i = 0; i < 1000000000; i++)
 
 // check if dom is ready
 const dom = new PromiseDom()
-dom.deferred.then(() => launch('starting'))
+dom.ready.then(() => launch('starting'))
 
 // launch function
 function launch(message) {

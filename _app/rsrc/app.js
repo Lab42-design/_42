@@ -12,7 +12,7 @@ for (let i = 0; i < 100000000; i++) {
 
 // CHECK DOM
 const dom = new PromiseDom()
-dom.deferred.then(() => launch('XXXXX__starting'))
+dom.ready.then(() => launch('_________ launching application'))
 
 
 

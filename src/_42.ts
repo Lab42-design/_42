@@ -6,7 +6,7 @@ import "whatwg-fetch"
 
 // check if dom is ready
 const dom = new PromiseDom()
-dom.deferred.then(() => launch('starting'))
+dom.ready.then(() => launch('starting'))
 
 
 

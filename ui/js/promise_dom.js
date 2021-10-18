@@ -17,9 +17,10 @@
  */
 class PromiseDom {
     constructor() {
-        this.deferred = new Promise(function (resolve, reject) {
+        this.ready = new Promise(function (resolve, reject) {
+            let _state = document.readyState;
             try {
-                if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                if (_state === 'interactive' || _state === 'complete') {
                     return Promise.resolve();
                 }
                 document.addEventListener('DOMContentLoaded', () => resolve(), false);

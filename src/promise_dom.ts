@@ -21,9 +21,12 @@ class PromiseDom {
         console.log('_42 / PromiseDom')
     }
 
-    deferred = new Promise<void>(function (resolve, reject) {
+    ready = new Promise<void>(function (resolve, reject) {
+
+        let _state : DocumentReadyState = document.readyState
+
         try {
-            if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            if (_state === 'interactive' || _state === 'complete') {
                 return Promise.resolve()
             }
             document.addEventListener('DOMContentLoaded', () => resolve(), false)

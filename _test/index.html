@@ -215,7 +215,7 @@
 // check domready
 // if dom is readu call start_application()
 const dom = new PromiseDom()
-dom.deferred.then(() => start_application('starting'))
+dom.ready.then(() => start_application('starting'))
 
 // const partial = new FetchPartial()
 
