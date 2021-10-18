@@ -18,10 +18,10 @@
  * 
  * then check if dom ise ready and..
  * 
+ * partial.fetchAll( 'link[rel="html"]' )
+ * or
  * const partial = new FetchPartial()
  * partial.fetchAll()
- * 
- * dom element selector default is: 'link[rel="html"]'
  * 
  * partial.fetchAll( 'link[rel="html"]' )
  * 
@@ -60,24 +60,19 @@ class FetchPartial {
         })
     }
 
-    // check if parent element is a loader for the partial
     processRequest(response, _el): Promise<void> {
         return new Promise<void>((resolve, reject) => {
 
             // const partials = document.querySelectorAll('link[rel="html"]');
 
+            // check if parent element is a wrapper for the partial
             // if (_el.parentNode && _el.parentNode.classList && _el.parentNode.classList.contains('partial')) {
-
+            // if (_el.parentNode.classList && _el.parentNode.classList.contains('partial')) {
             if (_el.parentNode && _el.parentNode.classList.contains('partial')) {
                 resolve(_el.parentNode.innerHTML = response)
             } else {
                 resolve(_el.outerHTML = response)
             }
-            // if (_el.parentNode.classList && _el.parentNode.classList.contains('partial')) {
-            //     resolve(_el.parentNode.innerHTML = response)
-            // } else {
-            //     resolve(_el.outerHTML = response)
-            // }
         })
     }
 
@@ -91,13 +86,5 @@ class FetchPartial {
             console.error(error)
         }
     }
-
-    // _getContainer(link) {
-    //     let container = link.getAttribute(this._config.containerAttr)
-    //     if (!container) {
-    //         container = this._config.defaultContainer
-    //     }
-    //     return container
-    // }
 
 }
