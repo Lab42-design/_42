@@ -100,8 +100,10 @@ observer.observe(document, config)
 
 <script>
 
-var observerTWO = new MutationObserver(function(mutations) {
+var observerTWO = new MutationObserver(function(mutations, observer) {
 
+
+    console.log('____________01')
     // for (let mutation of mutations) {
     //     if (mutation.type === 'childList') {
     //     console.log('+++++++ Mutation Detected: A child element has been added or removed.');
@@ -109,45 +111,79 @@ var observerTWO = new MutationObserver(function(mutations) {
     // }
     const partial2 = new FetchPartial()
 
+    // (function (mutations, me)
+
+    // throttle(updatePosition, 100)
+    function throttle (callback, limit) {
+        var waiting = false                       // Initially, we're not waiting
+        return function () {                      // We return a throttled function
+            if (!waiting) {                       // If we're not waiting
+                callback.apply(this, arguments)   // Execute users function
+                waiting = true                    // Prevent future invocations
+                setTimeout(function () {          // After a period of time
+                    waiting = false               // And allow future invocations
+                }, limit)
+            }
+        }
+    }
+
     mutations.forEach(function(mutation) {
+
+        console.log('____________02')
 
         const target2 = document.querySelectorAll('link[rel="html"]')
 
-        for (let i = 0; i < target2.length; i++) {
-            // console.log(target2[i])
-            partial2.fetchOne(target2[i])
+        if(target2) {
+
+            console.log('____________03')
+
+            let aaa = throttle(console.log('aha___'), 100)
+
+
+            for (let i = 0; i < target2.length; i++) {
+                partial2.fetchOne(target2[i])
+                // observerTWO.disconnect() 
+            }
+
+            
         }
 
+        // observer.disconnect() 
+        // observerTWO.disconnect() 
 
-        // if(target2) {
-        //     console.log('DET')
-        //     console.log(target2)
-        // }
-        // if(mutation.target.nodeName == "link" && !mutation.target.src.contains(domain))
-        // if(mutation.target.nodeName == "link" )
-        // {
-            // console.log('___C___C__V__V')
+    });  
+    
+    // observerTWO.disconnect() 
 
+})
 
 
-            // if (mutation.type === 'childList') {
-            //     console.log('Mutation Detected: A child element has been added or removed.');
-            //  }
-
-
-            // fixImage(mutation.target);
-        // }
-    });    
-});
+// childList: true,
+// attributes: true,
+// characterData: false,
+// subtree: false,
+// attributeFilter: ['one', 'two'],
+// attributeOldValue: false,
+// characterDataOldValue: false
 
 const config2 = { attributes: true, childList: true, characterData: true, subtree: true };
 observerTWO.observe(document, config2);
+
+
+// observerTWO.disconnect() 
 
 
 
 </script>
 
 
-    
+<script>
+
+
+
+
+
+
+</script>
 </body>
 </html>

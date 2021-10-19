@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<style>
+body {
+  font-family: sans-serif;
+}
+
+img {
+  display: block;
+  margin-bottom: 10px;
+}
+</style>
+
+
+<div rel="partial">
+    <link rel="html" href="./01.html" />
+</div>
+
+<div rel="partial">
+    <link rel="html" href="./02.html" />
+</div>
+
+<div rel="partial">
+    <link rel="html" href="./03.html" />
+</div>
+
+
+
+
+<span></span>
+<img class="my-images" src="http://placehold.it/300x100?text=image" width="300">
+<span></span>
+<img class="my-images" src="http://placehold.it/300x200?text=image" width="300">
+<span></span>
+<img class="my-images" src="http://placehold.it/300x300?text=image" width="300">
+
+
+<script module src="../ui/js/promise_dom.js"></script>
+<script module src="../ui/js/fetch_partial.js"></script>
+
+
+<script>
+    class ServiceCards {
+  constructor() {
+    this.subscribeNode = this.subscribeNode.bind(this);
+    this.observer = new MutationObserver(mutationsToObserve);
+  }
+
+  subscribeNode(node) {
+    node.addEventListener('transitionend', this.onTransitionEnd);
+    this.observer.observe(node, mutationOptions);
+  }
+
+  onTransitionEnd(ev) {
+    if (this.classList.contains('is-selected') && ev.propertyName === 'width') {
+      this.classList.remove('is-selected');
+    }
+  }
+}
+</script>
+
+
+
+<script>
+var imgs = Array.prototype.slice.call( document.images ),
+config = { attributes: true, attributeOldValue: true },
+observer = new MutationObserver( mutationCallback );
+
+function mutationCallback ( mutations ) {
+  mutations.forEach(function( record ) {
+    record.target.previousElementSibling.textContent = "";
+    record.target.previousElementSibling.textContent = "The image "
+      + record.attributeName 
+      + " attribute changed from " 
+      + record.oldValue 
+      + " to " 
+      + record.target.getAttribute('width')
+      + ".";
+  })
+  observer.disconnect();
+  startObserving( imgs );
+}
+
+function changeNodeAttr ( attr, nodes ) {
+  window.setTimeout(function() {
+    nodes.forEach(function( node ) {
+      node.setAttribute( attr, Math.floor( Math.random()*( 300 - 100 + 1 ) +100 ) );
+    })
+  }, 2500)
+}
+
+function startObserving ( nodes ) {
+  nodes.forEach(function( node ) {
+    observer.observe( node, config );
+  })
+  changeNodeAttr( "width", imgs );
+}
+
+startObserving( imgs );
+
+</script>
+</body>
+</html>
