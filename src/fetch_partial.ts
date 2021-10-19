@@ -62,12 +62,6 @@ class FetchPartial {
 
     processRequest(response, _el): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-
-            // const partials = document.querySelectorAll('link[rel="html"]');
-
-            // check if parent element is a wrapper for the partial
-            // if (_el.parentNode && _el.parentNode.classList && _el.parentNode.classList.contains('partial')) {
-            // if (_el.parentNode.classList && _el.parentNode.classList.contains('partial')) {
             if (_el.parentNode && _el.parentNode.classList.contains('partial')) {
                 resolve(_el.parentNode.innerHTML = response)
             } else {

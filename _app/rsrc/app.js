@@ -1,6 +1,9 @@
 //
 //
 //
+console.clear()
+
+
 
 // DEBUG
 // DELAY
@@ -9,17 +12,31 @@ for (let i = 0; i < 100000000; i++) {
 }
 
 
+// UTILITY FUNCTIONS
+function print(...message) {
+
+    let mymsg = message.replace(/,\s*$/, "");
+
+    console.log(`%c${mymsg}`, 'color: indigo')
+}
+
+
 
 // CHECK DOM
 const dom = new PromiseDom()
-dom.ready.then(() => launch('_________ launching application'))
+dom.ready.then(() => ___launch('9 8 7 6 5 4 3 2 1 0'))
 
 
 
 // LAUNCH
-function launch(message) {
+function ___launch(message) {
+    print('__________________________________')
+    print(message, ' ___launching')
+    print('_____________•˙.__________________')
 
-    console.log(message)
+    // console.log('%cHello World!', 'color: indigo')
+
+
 
     // 01 html partials
     include_html_partials()

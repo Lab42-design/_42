@@ -209,20 +209,22 @@
 <script module src="../ui/js/fetch_partial.js"></script>
 
 <script>
-
+console.clear()
 
 
 // check domready
 // if dom is readu call start_application()
 const dom = new PromiseDom()
-dom.ready.then(() => start_application('starting'))
+dom.ready.then(() => ___launch('9 8 7 6 5 4 3 2 1 0'))
 
 // const partial = new FetchPartial()
 
-function start_application(message) {
+function ___launch(message) {
 
     console.log('______________________________')
-    console.log('start_application:', message)
+    console.log(message)
+    console.log('___launch')
+    console.log('______________________________')
 
     // include partials
     const partial = new FetchPartial()
