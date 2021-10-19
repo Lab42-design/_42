@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div rel="partial">
+    <link rel="html" href="./01.html" />
+</div>
+
+<div rel="partial">
+    <link rel="html" href="./02.html" />
+</div>
+
+<div rel="partial">
+    <link rel="html" href="./03.html" />
+</div>
+
+
+
+
+    
+
+
+
+
+
+<!-- _42 scripts -->
+<script module src="../ui/js/promise_dom.js"></script>
+<script module src="../ui/js/fetch_partial.js"></script>
+
+<script>
+
+
+
+// include partials callback fn
+// callback executed when canvas was found
+function includeOne(target) {
+
+    const partial = new FetchPartial()
+
+    for (let i = 0; i < target.length; i++) {
+        partial.fetchOne(target[i])
+    }
+    // for(let entry of target.entries()) {
+    //     const partial = new FetchOne()
+    //     partial.fetchPartial(entry[1])
+    // }
+}
+
+function includeAll(target) { 
+    const partial = new FetchPartial()
+    partial.fetchAll()
+}
+
+// set up the mutation observer
+// `mutations` is an array of mutations that occurred
+// `me` is the MutationObserver instance
+var observer = new MutationObserver(function (mutations, me) {
+
+    console.log(mutations)
+
+    const target = document.querySelectorAll('link[rel="html"]')
+    // const target = document.querySelector('body');
+    // const target = document.body.link
+
+    // if target is found then do something with it
+    // and stop observing
+    if (target) {
+
+        const dom = new PromiseDom()
+        dom.ready.then(() => includeOne(target))
+        me.disconnect() 
+        // observer
+        return;
+    } else {
+        console.log('target found ELSE')
+    }
+})
+
+// start observing
+observer.observe(document, {
+    childList: true,
+    attributes: true,
+    characterData: true,
+    subtree: true,
+    attributeOldValue: true,
+    characterDataOldValue: true
+})
+
+
+</script>
+
+
+    
+</body>
+</html>

@@ -26,27 +26,23 @@
  * partial.fetchAll( 'link[rel="html"]' )
  *
  */
-class FetchPartial {
+class FetchOne {
     constructor() {
         console.log('_42 / FetchPartial');
     }
-    // _el is 
-    async fetchOne(element) {
-        if (element) {
-            console.log(element);
-            const url = element.getAttribute('href');
-            this.fetch(url, element);
+    async fetchPartial(_el) {
+        // if (_selector === undefined) {
+        //     _selector = 'link[rel="html"]'
+        // }
+        if (_el) {
+            const url = _el.getAttribute('href');
+            this.fetch(url, _el);
         }
-    }
-    async fetchAll(_selector) {
-        if (_selector === undefined) {
-            _selector = 'link[rel="html"]';
-        }
-        const partials = document.querySelectorAll(_selector);
-        for (let i = 0; i < partials.length; i++) {
-            const url = partials[i].getAttribute('href');
-            this.fetch(url, partials[i]);
-        }
+        // const partials: NodeListOf<any> = document.querySelectorAll(_selector)
+        // for (let i: number = 0; i < partials.length; i++) {
+        //     const url = partials[i].getAttribute('href')
+        //     this.fetch(url, partials[i])
+        // }
     }
     makeRequest(url) {
         return new Promise((resolve, reject) => {

@@ -32,6 +32,15 @@ class FetchPartial {
         console.log('_42 / FetchPartial')
     }
 
+    // _el is 
+    async fetchOne(element?) {
+        if(element) {
+            console.log(element)
+            const url = element.getAttribute('href')
+            this.fetch(url, element)
+        }
+    }
+
     async fetchAll(_selector?) {
 
         if (_selector === undefined) {
