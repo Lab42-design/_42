@@ -23,7 +23,19 @@
 
 
 
-    
+    <div>
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if(mutation.target.nodeName == "IMG" && !mutation.target.src.contains(domain))
+                {
+                    fixImage(mutation.target);
+                }
+            });    
+        });
+        
+        var config = { attributes: true, childList: true, characterData: true, subtree: true };
+        observer.observe(document.body, config);
+    </div>
 
 
 
