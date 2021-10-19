@@ -24,17 +24,7 @@
 
 
     <div>
-        var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if(mutation.target.nodeName == "IMG" && !mutation.target.src.contains(domain))
-                {
-                    fixImage(mutation.target);
-                }
-            });    
-        });
-        
-        var config = { attributes: true, childList: true, characterData: true, subtree: true };
-        observer.observe(document.body, config);
+
     </div>
 
 
@@ -45,16 +35,15 @@
 <script module src="../ui/js/promise_dom.js"></script>
 <script module src="../ui/js/fetch_partial.js"></script>
 
+<!---
 <script>
-
-
+    console.clear()
 
 // include partials callback fn
 // callback executed when canvas was found
 function includeOne(target) {
-
     const partial = new FetchPartial()
-
+    partial.fetchOne(target[i])
     for (let i = 0; i < target.length; i++) {
         partial.fetchOne(target[i])
     }
@@ -73,9 +62,6 @@ function includeAll(target) {
 // `mutations` is an array of mutations that occurred
 // `me` is the MutationObserver instance
 var observer = new MutationObserver(function (mutations, me) {
-
-    console.log(mutations)
-
     const target = document.querySelectorAll('link[rel="html"]')
     // const target = document.querySelector('body');
     // const target = document.body.link
@@ -83,9 +69,8 @@ var observer = new MutationObserver(function (mutations, me) {
     // if target is found then do something with it
     // and stop observing
     if (target) {
-
         const dom = new PromiseDom()
-        dom.ready.then(() => includeOne(target))
+        dom.ready.then(() => includeAll(target))
         me.disconnect() 
         // observer
         return;
@@ -95,14 +80,69 @@ var observer = new MutationObserver(function (mutations, me) {
 })
 
 // start observing
-observer.observe(document, {
+const config = { 
     childList: true,
     attributes: true,
     characterData: true,
     subtree: true,
     attributeOldValue: true,
     characterDataOldValue: true
-})
+}
+
+observer.observe(document, config)
+
+
+</script>
+-->
+
+
+
+
+<script>
+
+var observerTWO = new MutationObserver(function(mutations) {
+
+    // for (let mutation of mutations) {
+    //     if (mutation.type === 'childList') {
+    //     console.log('+++++++ Mutation Detected: A child element has been added or removed.');
+    //     }
+    // }
+    const partial2 = new FetchPartial()
+
+    mutations.forEach(function(mutation) {
+
+        const target2 = document.querySelectorAll('link[rel="html"]')
+
+        for (let i = 0; i < target2.length; i++) {
+            // console.log(target2[i])
+            partial2.fetchOne(target2[i])
+        }
+
+
+        // if(target2) {
+        //     console.log('DET')
+        //     console.log(target2)
+        // }
+        // if(mutation.target.nodeName == "link" && !mutation.target.src.contains(domain))
+        // if(mutation.target.nodeName == "link" )
+        // {
+            // console.log('___C___C__V__V')
+
+
+
+            // if (mutation.type === 'childList') {
+            //     console.log('Mutation Detected: A child element has been added or removed.');
+            //  }
+
+
+            // fixImage(mutation.target);
+        // }
+    });    
+});
+
+const config2 = { attributes: true, childList: true, characterData: true, subtree: true };
+observerTWO.observe(document, config2);
+
 
 
 </script>

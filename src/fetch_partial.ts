@@ -16,14 +16,21 @@
  * 
  * js
  * 
- * then check if dom ise ready and..
+ * then check if dom is ready and..
  * 
+ * MULTIPLE PARTIALS
  * partial.fetchAll( 'link[rel="html"]' )
  * or
  * const partial = new FetchPartial()
  * partial.fetchAll()
  * 
  * partial.fetchAll( 'link[rel="html"]' )
+ * 
+ * 
+ * SINGLE PARTIAL
+ * const partial_tag = document.select by ID
+ * const partial = new FetchPartial()
+ * partial.fetchOne(partial_tag)
  * 
  */
 class FetchPartial {
@@ -34,7 +41,7 @@ class FetchPartial {
 
     // _el is 
     async fetchOne(element?) {
-        if(element) {
+        if (element) {
             console.log(element)
             const url = element.getAttribute('href')
             this.fetch(url, element)
