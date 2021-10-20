@@ -95,15 +95,37 @@ observer.observe(document, config)
 </script>
 -->
 
+<h4>counting</h4>
+<pre>
+<code>
+var count = 0;
 
+var ourObserver = new MutationObserver(function() {
+	count++;
+	document.querySelector(
+		"#output"
+	).textContent = `I've observed this number of changes: ${count}`;
+});
+
+ourObserver.observe(document.querySelector("#changeable"), {
+	subtree: true,
+	childList: true
+});
+</code>
+</pre>
 
 
 <script>
 
+let count = 0;
+
 var observerTWO = new MutationObserver(function(mutations, observer) {
 
 
-    console.log('____________01')
+    count++;
+
+    
+    console.log(`I've observed this number of changes: ${count}`)
     // for (let mutation of mutations) {
     //     if (mutation.type === 'childList') {
     //     console.log('+++++++ Mutation Detected: A child element has been added or removed.');
@@ -115,7 +137,9 @@ var observerTWO = new MutationObserver(function(mutations, observer) {
 
     // throttle(updatePosition, 100)
     function throttle (callback, limit) {
-        var waiting = false                       // Initially, we're not waiting
+
+        let waiting = false                       // Initially, we're not waiting
+
         return function () {                      // We return a throttled function
             if (!waiting) {                       // If we're not waiting
                 callback.apply(this, arguments)   // Execute users function
@@ -125,6 +149,7 @@ var observerTWO = new MutationObserver(function(mutations, observer) {
                 }, limit)
             }
         }
+
     }
 
     mutations.forEach(function(mutation) {
@@ -177,7 +202,71 @@ observerTWO.observe(document, config2);
 </script>
 
 
+
+
+
+
+
 <script>
+
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver
+
+let countX = 0;
+
+
+// define a new observer
+let obs = new MutationObserver(function(mutations, observer) {
+
+    countX++;
+
+    console.log("________________ X F G")
+    console.log(`________________ X F G changes: ${countX}`)
+
+    // look through all mutations that just occured
+    for(let i=0; i<mutations.length; ++i) {
+
+        console.log("________________ FORLOOP 1")
+
+        console.log('NUMBER: ', i, ' ___ MUTATION LENGHT: ', mutations.length)
+
+
+        let countXX = 0;
+
+        // look through all added nodes of this mutation
+        for(var j=0; j<mutations[i].addedNodes.length; ++j) {
+
+            countXX++;
+
+            console.log("________________ FORLOOP 2")
+
+            // was a child added with ID of 'bar'?
+            if(mutations[i].addedNodes[j]) {
+
+                console.log("________________ FORLOOP 2 IF IF IF")
+                console.log(`________________ countXX === : ${countXX}`)
+
+                console.log(mutations[i].addedNodes[j])
+
+                console.log("bar was added!");
+            }
+
+
+        }
+
+
+    }
+
+
+});
+
+// have the observer observe foo for changes in children
+obs.observe(document, {
+  childList: true,
+  subtree: true
+});
+
+
+
 
 
 
@@ -185,5 +274,10 @@ observerTWO.observe(document, config2);
 
 
 </script>
+
+
+
+
+
 </body>
 </html>

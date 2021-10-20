@@ -15,9 +15,9 @@ for (let i = 0; i < 100000000; i++) {
 // UTILITY FUNCTIONS
 function print(...message) {
 
-    let mymsg = message.replace(/,\s*$/, "");
+    // let mymsg = message.replace(/,\s*$/, "");
 
-    console.log(`%c${mymsg}`, 'color: indigo')
+    console.log(`%c${message}`, 'color: indigo')
 }
 
 
