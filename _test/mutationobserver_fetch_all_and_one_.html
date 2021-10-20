@@ -95,22 +95,10 @@ observer.observe(document, config)
 </script>
 -->
 
-<h4>counting</h4>
+<h4>code</h4>
 <pre>
 <code>
-var count = 0;
 
-var ourObserver = new MutationObserver(function() {
-	count++;
-	document.querySelector(
-		"#output"
-	).textContent = `I've observed this number of changes: ${count}`;
-});
-
-ourObserver.observe(document.querySelector("#changeable"), {
-	subtree: true,
-	childList: true
-});
 </code>
 </pre>
 
@@ -121,10 +109,8 @@ let count = 0;
 
 var observerTWO = new MutationObserver(function(mutations, observer) {
 
-
     count++;
 
-    
     console.log(`I've observed this number of changes: ${count}`)
     // for (let mutation of mutations) {
     //     if (mutation.type === 'childList') {
@@ -132,14 +118,10 @@ var observerTWO = new MutationObserver(function(mutations, observer) {
     //     }
     // }
     const partial2 = new FetchPartial()
-
     // (function (mutations, me)
-
     // throttle(updatePosition, 100)
     function throttle (callback, limit) {
-
         let waiting = false                       // Initially, we're not waiting
-
         return function () {                      // We return a throttled function
             if (!waiting) {                       // If we're not waiting
                 callback.apply(this, arguments)   // Execute users function
@@ -149,37 +131,25 @@ var observerTWO = new MutationObserver(function(mutations, observer) {
                 }, limit)
             }
         }
-
     }
 
     mutations.forEach(function(mutation) {
 
         console.log('____________02')
-
         const target2 = document.querySelectorAll('link[rel="html"]')
 
         if(target2) {
-
             console.log('____________03')
-
             let aaa = throttle(console.log('aha___'), 100)
-
-
             for (let i = 0; i < target2.length; i++) {
                 partial2.fetchOne(target2[i])
                 // observerTWO.disconnect() 
             }
-
-            
         }
-
         // observer.disconnect() 
         // observerTWO.disconnect() 
-
     });  
-    
     // observerTWO.disconnect() 
-
 })
 
 
