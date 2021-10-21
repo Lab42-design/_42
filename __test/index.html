@@ -16,26 +16,18 @@ blockquote {
 </style>
 
 
-http://ryanmorr.com/using-mutation-observers-to-watch-for-element-availability/
-https://www.smashingmagazine.com/2019/04/mutationobserver-api-guide/
 
 
-
-
-<div id="myList">
-<link rel="html" href="./foo.html" />
+<div class="myList">
+    <link rel="html" href="./foo.html" />
 </div>
 
-<div rel="partial">
+<div class="partial">
     <link rel="html" href="./bar.html" />
 </div>
 
-<div rel="partial">
+<div class="partial">
     <link rel="html" href="./foobar.html" />
-</div>
-
-<div rel="partial">
-    <link rel="html" href="./baz.html" />
 </div>
 
 
@@ -46,130 +38,186 @@ https://www.smashingmagazine.com/2019/04/mutationobserver-api-guide/
 <script module src="../ui/js/42.js"></script>
 
 <script>
+"use strict";
 
-let count = 0;
+console.clear()
 
-let observer = new MutationObserver(function(mutations, observer) {
+const dom = new PromiseDom()
+dom.ready.then(() => ___launch('9 8 7 6 5 4 3 2 1 0'))
 
-    count++;
-    // console.log(`I've observed this number of changes: ${count}`)
-
-    // for (let mutation of mutations) {
-    //     if (mutation.type === 'childList') {
-    //     console.log('+++++++ Mutation Detected: A child element has been added or removed.');
-    //     }
-    // }
+// // LAUNCH
+function ___launch(message) {
+    console.log(message)
 
     const partial = new FetchPartial()
-
     const target = document.querySelectorAll('link[rel="html"]')
 
-/*
-    for(var i=0; i<mutation.length; ++i) {
-
-
-        // look through all added nodes of this mutation
-        for(var j=0; j<mutations[i].addedNodes.length; ++j) {
-            // was a child added with ID of 'bar'?
-            // if(mutations[i].addedNodes[j].id == "bar") {
-            //     console.log("bar was added!");
-            // }
-        }
-
-    }
-*/
-    for (let mutation of mutations) {
-        if (mutation.type === 'childList') {
-        console.log('Mutation Detected: A child node has been added or removed.');
+    if(target) {
+        for (let i = 0; i < target.length; i++) {
+            partial.fetchOne(target[i])
         }
     }
 
+}
 
 
-    mutations.forEach(function(mutation) {
 
-        console.log("XXXXXX mutation detected: " + mutation.target.tagName);
 
-        // console.log(' IIIIIIIIII ')
-        // console.log(mutation.target.childNodes)
-        // console.log(' IIIIIIIIII ')
 
-        if (mutation.target.tagName === "DIV") {
-            console.log('mutation child name is link')
-            mutation.target.onclick =function () { console.log("The video has been clicked")}
-        }
-        
-        if(target) {
-            for (let i = 0; i < target.length; i++) {
-                partial.fetchOne(target[i])
+
+
+let observer = new MutationObserver(mutations => {
+
+  for(let mutation of mutations) {
+    // examine new nodes, is there anything to highlight?
+    console.log('---01')
+
+
+    // mutations.forEach(function (mutation) {
+    //     console.log(mutation.type, "added: " + mutation.addedNodes.length + "  nodes")
+    //     console.log(mutation.type, "removed: " + mutation.removedNodes.length + " nodes")
+    // });
+
+
+
+    for(let node of mutation.addedNodes) {
+
+        console.log('------02')
+
+        // we track only elements, skip other nodes (e.g. text nodes)
+        if (!(node instanceof HTMLElement)) {
+            console.log('! instanceof')
+            continue
+        } else {
+            console.log('instanceof')
+            console.log(node)
+
+            console.log('ID_')
+            console.log(node.id)
+
+            if (node.matches('link')) {
+                console.log('hello')
+                partial.fetchOne(node)
+                // Prism.highlightElement(node);
             }
+            
+
+            // console.log('------ELSE')
         }
 
-    })
+
+    //   console.log(node.matches('link[rel="html"]'))
+
+      // check the inserted element for being a code snippet
+    //   if (node.matches('link')) {
+    //       console.log('hello')
+    //     // Prism.highlightElement(node);
+    //   }
+
+      // or maybe there's a code snippet somewhere in its subtree?
+    //   for(let elem of node.querySelectorAll('pre[class*="language-"]')) {
+        // Prism.highlightElement(elem);
+    //   }
 
 
-    // if(mutations[i].addedNodes[j].id == "bar") {
-    //     console.log("childnode was added!");
-    // }
+    }
+  }
 
+});
 
-})
+let demoElem = document.querySelector('body');
 
-
-
-
-const config = { 
-    childList: true,
-    subtree: true,
-    attributes: false,
-    characterData: false,
-    // attributeFilter: ['one', 'two'],
-    attributeOldValue: false,
-    characterDataOldValue: false
-}
-
-observer.observe(document, config)
-
-
-// observerTWO.disconnect() 
-
-
-
-
+observer.observe(demoElem, {childList: true, subtree: true});
 </script>
 
 
 
 
-
+<!-- 
 <script>
-let mList = document.getElementById('myList')
+    
 
-options = {
+const options = {
     childList: true,
-    subtree: true,
     attributes: false,
     characterData: false,
+    subtree: false,
     // attributeFilter: ['one', 'two'],
     attributeOldValue: false,
     characterDataOldValue: false
 }
 
-observerX = new MutationObserver(mCallback)
 
-function mCallback(mutations) {
+const partial = new FetchPartial()
+
+
+const element = document.querySelector('body');
+
+
+let count = 0
+let countXX = 0
+let countXXX = 0
+
+const observer = new MutationObserver(function(mutations, observer) {
+    // console.log('callback that runs when observer is triggered')
+
+    count++
+    console.log(`count A: ${count}`)
+    // const target = document.querySelectorAll('link[rel="html"]')
+
+    
 
     for (let mutation of mutations) {
+
+        countXX++
+        console.log(`count B: ${countXX}`)
+
         if (mutation.type === 'childList') {
-            console.log('_________________Mutation Detected: A child node has been added or removed.')
+
+            // console.log('__________ childList')
+
+            // if(target) {
+            //     for (let i = 0; i < target.length; i++) {
+            //         partial.fetchOne(target[i])
+            //     }
+            // }
+
+            const target = document.querySelectorAll('link[rel="html"]')
+
+            if(target) {
+
+                // console.log('___IF TARGET')
+
+                for (let i = 0; i < target.length; i++) {
+
+                    console.log('__________')
+
+                    countXXX++
+                    console.log(`count C: ${countXXX}`)
+
+                    // partial.fetchOne(target[i])\
+                    
+                    console.log(target[i])
+                }
+            }
+
+            
         }
+
     }
 
-}
 
-observerX.observe(mList, options)
 
+});
+
+
+observer.observe(element, options);
 
 </script>
+
+a -->
+
+
+
 </body>
 </html>

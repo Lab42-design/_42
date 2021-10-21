@@ -3,7 +3,6 @@
  * https://www.smashingmagazine.com/2019/04/mutationobserver-api-guide/
  *
  */
-//  import { PromiseDom } from "./promise_dom";
 class App {
     constructor() {
         console.log('_42 / App');

@@ -39,8 +39,9 @@ class FetchPartial {
     }
     // _el is 
     async fetchOne(element) {
+        console.log('_42 / FetchPartial / fetchOne');
         if (element) {
-            console.log(element);
+            // console.log(element)
             const url = element.getAttribute('href');
             this.fetch(url, element);
         }

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nested partials and MutationObserver</title>
+</head>
+<body>
+
+<style>
+blockquote {
+    background-color: rgba(222, 184, 135, 0.445);
+    padding: 30px;
+}
+</style>
+
+
+http://ryanmorr.com/using-mutation-observers-to-watch-for-element-availability/
+https://www.smashingmagazine.com/2019/04/mutationobserver-api-guide/
+
+
+
+
+<div id="myList">
+<link rel="html" href="./foo.html" />
+</div>
+
+<!-- <div rel="partial">
+    <link rel="html" href="./bar.html" />
+</div>
+
+<div rel="partial">
+    <link rel="html" href="./foobar.html" />
+</div>
+
+<div rel="partial">
+    <link rel="html" href="./baz.html" />
+</div> -->
+
+
+
+<!-- _42 scripts -->
+<!-- <script module src="../ui/js/promise_dom.js"></script>
+<script module src="../ui/js/fetch_partial.js"></script> -->
+<script module src="../ui/js/42.js"></script>
+
+<script>
+console.clear()
+
+
+
+const dom = new PromiseDom()
+dom.ready.then(() => ___launch('9 8 7 6 5 4 3 2 1 0'))
+
+
+
+// LAUNCH
+function ___launch(message) {
+    console.log(message)
+
+
+
+
+
+
+
+
+
+let count = 0;
+
+let observer = new MutationObserver(function(mutations, observer) {
+
+    // console.log(`I've observed this number of changes: ${count}`)
+
+    // for (let mutation of mutations) {
+    //     if (mutation.type === 'childList') {
+    //     console.log('+++++++ Mutation Detected: A child element has been added or removed.');
+    //     }
+    // }
+
+    const partial = new FetchPartial()
+
+    const target = document.querySelectorAll('link[rel="html"]')
+
+/*
+    for(var i=0; i<mutation.length; ++i) {
+
+        // look through all added nodes of this mutation
+        for(var j=0; j<mutations[i].addedNodes.length; ++j) {
+            // was a child added with ID of 'bar'?
+            // if(mutations[i].addedNodes[j].id == "bar") {
+            //     console.log("bar was added!");
+            // }
+        }
+
+    }
+*/
+    for (let mutation of mutations) {
+        if (mutation.type === 'childList') {
+
+            // if(target) {
+            //     for (let i = 0; i < target.length; i++) {
+            //         partial.fetchOne(target[i])
+            //     }
+            // }
+
+        // console.log('Mutation Detected: A child node has been added or removed.');
+        }
+    }
+
+
+    mutations.forEach(function(mutation) {
+
+        count++;
+
+        // console.log("XXXXXX mutation detected: " + mutation.target.tagName);
+
+        console.log('___XXX___XXX___')
+        console.log(`I've observed this number of changes: ${count}`)
+        console.log('___XXX___XXX___')
+        // console.log('+++++++ Mutation Detected: A child element has been added or removed.');
+
+        // console.log(' IIIIIIIIII ')
+        // console.log(mutation.target.childNodes)
+        // console.log(' IIIIIIIIII ')
+
+        if (mutation.target.tagName === "LINK") {
+            console.log('XXXFFFPPP mutation child name is link')
+            // mutation.target.onclick =function () { console.log("The video has been clicked")}
+        }
+        
+        if(target) {
+            for (let i = 0; i < target.length; i++) {
+                partial.fetchOne(target[i])
+            }
+        }
+
+    })
+
+    // if(mutations[i].addedNodes[j].id == "bar") {
+    //     console.log("childnode was added!");
+    // }
+
+})
+
+const config = { 
+    childList: true,
+    subtree: true,
+    attributes: false,
+    characterData: false,
+    // attributeFilter: ['one', 'two'],
+    attributeOldValue: false,
+    characterDataOldValue: false
+}
+
+observer.observe(document, config)
+
+
+
+
+
+
+}
+
+
+</script>
+
+
+
+
+
+<script>
+let mList = document.getElementById('myList')
+
+options = {
+    childList: true,
+    subtree: true,
+    attributes: false,
+    characterData: false,
+    // attributeFilter: ['one', 'two'],
+    attributeOldValue: false,
+    characterDataOldValue: false
+}
+
+observerX = new MutationObserver(mCallback)
+
+function mCallback(mutations) {
+
+    for (let mutation of mutations) {
+        if (mutation.type === 'childList') {
+            console.log('_________________Mutation Detected: A child node has been added or removed.')
+        }
+    }
+
+}
+
+observerX.observe(mList, options)
+
+
+</script>
+</body>
+</html>

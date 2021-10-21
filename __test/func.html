@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+<ul id="myList" class="list">
+    <li>Apples</li>
+    <li>Oranges</li>
+    <li>Bananas</li>
+    <li class="child">Peaches</li>
+    </ul>
+
+
+
+<script>
+let mList = document.getElementById('myList'),
+options = {
+  childList: true
+},
+observer = new MutationObserver(mCallback);
+
+function mCallback(mutations) {
+
+    console.log('eee')
+  for (let mutation of mutations) {
+    if (mutation.type === 'childList') {
+      console.log('Mutation Detected: A child node has been added or removed.');
+    }
+  }
+}
+
+observer.observe(mList, options);
+
+
+
+
+</script>
