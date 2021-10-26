@@ -15,30 +15,31 @@ blockquote {
 }
 </style>
 
-
+need a treewalker
+https://stackoverflow.com/questions/61314922/mutationobserver-not-picking-up-on-child-nodes
 
 
 <div class="myList">
-    <link rel="html" href="./foo.html" />
+    <link id="AAA" rel="html" href="./foo.html" />
 </div>
 
 <div class="partial">
-    <link rel="html" href="./bar.html" />
+    <link id="BBB" rel="html" href="./bar.html" />
 </div>
 
-<div class="partial">
-    <link rel="html" href="./foobar.html" />
+<div class="c">
+    <link id="CCC" rel="html" href="./foobar.html" />
 </div>
 
 
 
 <!-- _42 scripts -->
-<!-- <script module src="../ui/js/promise_dom.js"></script>
-<script module src="../ui/js/fetch_partial.js"></script> -->
-<script module src="../ui/js/42.js"></script>
+<script module src="../ui/js/promise_dom.js"></script>
+<script module src="../ui/js/fetch_partial.js"></script>
+<!-- <script module src="../ui/js/42.js"></script> -->
 
 <script>
-"use strict";
+"use strict"
 
 console.clear()
 
@@ -68,58 +69,30 @@ function ___launch(message) {
 
 let observer = new MutationObserver(mutations => {
 
+    const partial = new FetchPartial()
+    
   for(let mutation of mutations) {
     // examine new nodes, is there anything to highlight?
-    console.log('---01')
+    console.log('---MUTATION')
 
+    // for (let i = 0; i < mutation.addedNodes.length; i++) {
 
-    // mutations.forEach(function (mutation) {
-    //     console.log(mutation.type, "added: " + mutation.addedNodes.length + "  nodes")
-    //     console.log(mutation.type, "removed: " + mutation.removedNodes.length + " nodes")
-    // });
-
-
+    //     console.log('------02')
+    //     // console.log(node[1].id)
+    //         console.log(i)
+    //         console.log(mutation.addedNodes[i])
+    // }
 
     for(let node of mutation.addedNodes) {
-
-        console.log('------02')
-
-        // we track only elements, skip other nodes (e.g. text nodes)
-        if (!(node instanceof HTMLElement)) {
-            console.log('! instanceof')
-            continue
-        } else {
-            console.log('instanceof')
+        if(node.tagName == 'LINK') {
+            console.log('____________________g')
             console.log(node)
+            console.log('____________________g')
+            partial.fetchOne(node)
 
-            console.log('ID_')
-            console.log(node.id)
-
-            if (node.matches('link')) {
-                console.log('hello')
-                partial.fetchOne(node)
-                // Prism.highlightElement(node);
-            }
-            
-
-            // console.log('------ELSE')
+        } else {
+            // console.log("It's not a div! [some other stuff]");
         }
-
-
-    //   console.log(node.matches('link[rel="html"]'))
-
-      // check the inserted element for being a code snippet
-    //   if (node.matches('link')) {
-    //       console.log('hello')
-    //     // Prism.highlightElement(node);
-    //   }
-
-      // or maybe there's a code snippet somewhere in its subtree?
-    //   for(let elem of node.querySelectorAll('pre[class*="language-"]')) {
-        // Prism.highlightElement(elem);
-    //   }
-
-
     }
   }
 
@@ -127,7 +100,10 @@ let observer = new MutationObserver(mutations => {
 
 let demoElem = document.querySelector('body');
 
-observer.observe(demoElem, {childList: true, subtree: true});
+observer.observe(demoElem, {
+    childList: true,
+    subtree: true
+});
 </script>
 
 

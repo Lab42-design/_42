@@ -135,14 +135,28 @@ var observerTWO = new MutationObserver(function(mutations, observer) {
 
     mutations.forEach(function(mutation) {
 
-        console.log('____________02')
+        console.log('XXX____________mutation02')
+        // console.log(mutation.target.querySelector('link[rel="html"]').href)
+        partial2.fetchOne(mutation.target.querySelector('link[rel="html"]').href)
+        console.log('XXX____________mutation02')
+
+        // if(target2) {
+        //     console.log('____________03')
+        //     let aaa = throttle(console.log('aha___'), 100)
+        //     for (let i = 0; i < target2.length; i++) {
+        //         partial2.fetchOne(target2[i])
+        //         // observerTWO.disconnect() 
+        //     }
+        // }
+
+
         const target2 = document.querySelectorAll('link[rel="html"]')
 
         if(target2) {
             console.log('____________03')
             let aaa = throttle(console.log('aha___'), 100)
             for (let i = 0; i < target2.length; i++) {
-                partial2.fetchOne(target2[i])
+                // partial2.fetchOne(target2[i])
                 // observerTWO.disconnect() 
             }
         }

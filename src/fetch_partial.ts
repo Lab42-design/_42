@@ -43,14 +43,14 @@ class FetchPartial {
     async fetchOne(element?) {
         console.log('_42 / FetchPartial / fetchOne')
         if (element) {
-            // console.log(element)
+            console.log('___________FUCK______ element id === ' + element.id)
             const url = element.getAttribute('href')
             this.fetch(url, element)
         }
     }
 
     async fetchAll(_selector?) {
-
+        console.log('_42 / FetchPartial / fetchAll')
         if (_selector === undefined) {
             _selector = 'link[rel="html"]'
         }
