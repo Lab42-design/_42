@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="myList">
+        <link id="AAA" rel="html" href="./foo.html" />
+    </div>
+    
+    <div class="partial">
+        <link id="BBB" rel="html" href="./bar.html" />
+    </div>
+    
+    <div class="c">
+        <link id="CCC" rel="html" href="./foobar.html" />
+    </div>
+
+<hr>
+    <div id="frame">
+    </div>
+<hr>
+
+
+
+
+<div id="template" style="display: none;">
+    <div class="level-1">
+        <div class="level-2">
+            <div class="nested">
+            I exist in the DOM but am not being seen by the MutationObserver
+            </div>
+        </div>
+    </div>
+
+    <div class="level-1">
+        <div class="level-2">
+            <div class="nested">
+                I exist in the DOM but am not being seen by the MutationObserver
+            </div>
+        </div>
+    </div>
+
+    <div class="level-1">
+        <div class="level-2">
+            <div class="nested">
+                I exist in the DOM but am not being seen by the MutationObserver
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    html-partial {
+        display: none;
+        position: fixed;
+        width: 0px;
+        height: 0px;
+        top: -200px;
+        left: -200px;
+    }
+</style>
+<html-partial>
+    <hr>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde totam laudantium provident porro dolore cum fuga minus voluptatum possimus sint accusamus, velit similique molestiae temporibus nulla pariatur aliquam! Eveniet, quam!
+        </p>
+    <hr>
+</html-partial>
+
+
+<script module src="../ui/js/promise_dom.js"></script>
+<script module src="../ui/js/fetch_partial.js"></script>
+<!-- <script module src="../ui/js/42.js"></script> -->
+
+
+
+<script>
+
+console.clear()
+
+const dom = new PromiseDom()
+dom.ready.then(() => ___launch('9 8 7 6 5 4 3 2 1 0'))
+
+// // LAUNCH
+function ___launch(message) {
+    console.log(message)
+
+    const partial = new FetchPartial()
+    const target = document.querySelectorAll('link[rel="html"]')
+
+    if(target) {
+        for (let i = 0; i < target.length; i++) {
+            partial.fetchOne(target[i])
+        }
+    }
+
+}
+
+
+
+
+
+const frame = document.querySelector('body');
+
+const domObserver = new MutationObserver(() => {
+
+    // If the container's innerHTML was assigned to, iterate over all descendants:
+    const treeWalker = document.createTreeWalker(frame)
+
+    const nodes = []
+
+    let currentNode = treeWalker.currentNode
+        while (currentNode) {
+        nodes.push(currentNode);
+            currentNode = treeWalker.nextNode()
+        }
+
+    console.log(nodes)
+
+})
+
+domObserver.observe(frame, {
+  childList: true,
+  subtree: true
+})
+
+
+
+document.querySelector('#frame').innerHTML = document.querySelector('html-partial').innerHTML
+
+
+
+const partial = new FetchPartial()
+
+const target = document.querySelectorAll('link[rel="html"]')
+
+if(target) {
+    for (let i = 0; i < target.length; i++) {
+        partial.fetchOne(target[i])
+    }
+}
+
+// for(let node of mutation.addedNodes) {
+//     if(node.tagName == 'LINK') {
+//         console.log('____________________g')
+//         console.log(node)
+//         console.log('____________________g')
+//         partial.fetchOne(node)
+//     } else {
+//         // console.log("It's not a div! [some other stuff]");
+//     }
+// }
+
+
+
+
+
+// copy child nodes out of #template (as a string) and inject them into #frame for the observer to detect
+
+
+</script>
+</body>
+</html>
+
+
