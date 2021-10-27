@@ -69,6 +69,24 @@ function ___launch(message) {
 
 let observer = new MutationObserver(mutations => {
 
+        const _target = document.querySelector('body');
+
+        // If the container's innerHTML was assigned to, iterate over all descendants:
+        const treeWalker = document.createTreeWalker(_target)
+
+        const nodes = []
+
+        let currentNode = treeWalker.currentNode
+
+            while (currentNode) {
+                nodes.push(currentNode)
+                currentNode = treeWalker.nextNode()
+            }
+
+        console.log(nodes)
+
+
+
     const partial = new FetchPartial()
     
   for(let mutation of mutations) {
